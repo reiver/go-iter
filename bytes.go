@@ -57,7 +57,7 @@ func (receiver *Bytes) Err() error {
 //
 // And a call to the Decode method will obtain that next datum.
 //
-// If there is no next datum, Next return false.
+// If there is no next datum, Next returns false.
 //
 // If an error was encountered while calling Next, Next will also return false.
 //
