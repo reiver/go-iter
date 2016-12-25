@@ -17,6 +17,9 @@ func (receiver *Bools) Close() error {
 	return nil
 }
 
+// Decode stores the next datum in the data represented by the empty interface value `x`.
+// If `x` is nil, the value will be discarded.
+// Otherwise, the value underlying `x` must be a pointer to the correct type for the next datum.
 func (receiver *Bools) Decode(x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
