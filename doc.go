@@ -19,13 +19,13 @@ For example, we can turn a slice into an iterator, with code like the following:
 	defer iterator.Close()
 	
 	for iterator.Next() {
-
+	
 		var datum string
-
+	
 		if err := iterator.Decode(&datum); nil != err {
 			return err
 		}
-
+	
 		fmt.Printf("Next datum: %v \n", datum)
 	}
 	if err := iterator.Err(); nil != err {
