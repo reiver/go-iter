@@ -28,15 +28,22 @@ func (receiver *Complex128s) Decode(x interface{}) error {
 	receiver.mutex.RLock()
 	defer receiver.mutex.RUnlock()
 
-	p, ok := x.(*complex128)
-	if !ok {
+	switch p := x.(type) {
+	case *complex128:
+		if nil == p {
+			return nil
+		}
+
+		*p = receiver.datum
+	case *interface{}:
+		if nil == p {
+			return nil
+		}
+
+		*p = receiver.datum
+	default:
 		return &internalBadTypeComplainer{fmt.Sprintf("%T", p)}
 	}
-	if nil == p {
-		return nil
-	}
-
-	*p = receiver.datum
 
 	return nil
 }

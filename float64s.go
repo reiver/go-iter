@@ -28,15 +28,22 @@ func (receiver *Float64s) Decode(x interface{}) error {
 	receiver.mutex.RLock()
 	defer receiver.mutex.RUnlock()
 
-	p, ok := x.(*float64)
-	if !ok {
+	switch p := x.(type) {
+	case *float64:
+		if nil == p {
+			return nil
+		}
+
+		*p = receiver.datum
+	case *interface{}:
+		if nil == p {
+			return nil
+		}
+
+		*p = receiver.datum
+	default:
 		return &internalBadTypeComplainer{fmt.Sprintf("%T", p)}
 	}
-	if nil == p {
-		return nil
-	}
-
-	*p = receiver.datum
 
 	return nil
 }

@@ -29,15 +29,22 @@ func (receiver *Times) Decode(x interface{}) error {
 	receiver.mutex.RLock()
 	defer receiver.mutex.RUnlock()
 
-	p, ok := x.(*time.Time)
-	if !ok {
+	switch p := x.(type) {
+	case *time.Time:
+		if nil == p {
+			return nil
+		}
+
+		*p = receiver.datum
+	case *interface{}:
+		if nil == p {
+			return nil
+		}
+
+		*p = receiver.datum
+	default:
 		return &internalBadTypeComplainer{fmt.Sprintf("%T", p)}
 	}
-	if nil == p {
-		return nil
-	}
-
-	*p = receiver.datum
 
 	return nil
 }
