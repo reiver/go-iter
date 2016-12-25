@@ -1,6 +1,9 @@
 /*
 Package iter provides tools for creating iterators.
 
+These iterators are intentionally made to resemble *sql.Rows from the "database/sql" package.
+Including having the same Close, Err, and Next methods.
+
 For example, we can turn a slice into an iterator, with code like the following:
 
 	var slice []string = []string {
