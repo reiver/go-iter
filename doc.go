@@ -13,6 +13,8 @@ For example, we can turn a slice into an iterator, with code like the following:
 		Slice: slice,
 	}
 	
+	defer iterator.Close()
+	
 	for iterator.Next() {
 
 		var datum string
