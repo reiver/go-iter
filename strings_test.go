@@ -84,6 +84,25 @@ func TestStrings(t *testing.T) {
 			}
 
 			actualData = append(actualData, datum)
+
+
+			var x interface{}
+
+			if err := iterator.Decode(&x); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+				continue
+			}
+
+			datum2, ok := x.(string)
+			if !ok {
+				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
+				continue
+			}
+
+			if expected, actual := datum, datum2; expected != actual {
+				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+				continue
+			}
 		}
 		if err := iterator.Err(); nil != err {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
