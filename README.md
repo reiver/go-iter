@@ -25,7 +25,7 @@ var slice []string = []string {
 	"cherry",
 }
 
-iterator := iter.Strings{
+iterator := iter.String{
 	Slice: slice,
 }
 

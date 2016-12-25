@@ -15,7 +15,7 @@ For example, we can turn a slice into an iterator, with code like the following:
 		"cherry",
 	}
 	
-	iterator := iter.Strings{
+	iterator := iter.String{
 		Slice: slice,
 	}
 	
