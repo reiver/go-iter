@@ -92,6 +92,12 @@ func TestComplex128s(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
+			if err := iterator.Decode((*complex128)(nil)); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+				continue
+			}
+
+
 			var x interface{}
 
 			if err := iterator.Decode(&x); nil != err {
@@ -107,6 +113,12 @@ func TestComplex128s(t *testing.T) {
 
 			if expected, actual := datum, datum2; expected != actual {
 				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+				continue
+			}
+
+
+			if err := iterator.Decode((*interface{})(nil)); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
 		}
