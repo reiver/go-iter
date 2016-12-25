@@ -38,6 +38,8 @@ func (receiver *Bools) Decode(x interface{}) error {
 	return nil
 }
 
+// Err returns the error, if an error was encountered during an iteration.
+// If no error was encountered during an iteration, then Err returns nil.
 func (receiver *Bools) Err() error {
 	if nil == receiver {
 		return errNilReceiver
