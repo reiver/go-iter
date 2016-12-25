@@ -2,8 +2,8 @@
 
 Package **iter** provides tools for creating iterators, for the Go programming language.
 
-These iterators are intentionally made to resemble *sql.Rows from the "database/sql" package.
-Including having the same Close, Err, and Next methods.
+These iterators are intentionally made to resemble `*sql.Rows` from the `"database/sql"` package.
+Including having the same `Close`, `Err`, and `Next` methods.
 
 
 ## Documention
