@@ -35,6 +35,6 @@ For example, we can turn a slice into an iterator, with code like the following:
 		return err
 	}
 
-This can help to enable us to write more (run-time) generic code.
+This can help to enable us to write more (run-time oriented) generic code.
 */
 package iter
