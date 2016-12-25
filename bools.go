@@ -51,6 +51,20 @@ func (receiver *Bools) Err() error {
 	return receiver.err
 }
 
+// Next prepares the next datum for reading via the Decode method.
+//
+// If there is indeed a next datum, Next returns true.
+//
+// And a call to the Decode method will obtain that next datum.
+//
+// If there is no next datum, Next return false.
+//
+// If an error was encountered while calling Next, Next will also return false.
+//
+// And a call to the Err method will obtain that error.
+//
+// Err should be called to distinguish between the two cases where the Next
+// method can return false: 'no next datum' and 'an error was encountered'.
 func (receiver *Bools) Next() bool {
 	if nil == receiver {
 		return false
