@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestStrings(t *testing.T) {
+func TestString(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -61,7 +61,7 @@ func TestStrings(t *testing.T) {
 
 		slice := append([]string(nil), test.Slice...)
 
-		iterator := Strings{
+		iterator := String{
 			Slice: slice,
 		}
 

@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestInt64s(t *testing.T) {
+func TestInt64(t *testing.T) {
 
 	tests := []struct{
 		Slice []int64
@@ -67,7 +67,7 @@ func TestInt64s(t *testing.T) {
 
 		slice := append([]int64(nil), test.Slice...)
 
-		iterator := Int64s{
+		iterator := Int64{
 			Slice: slice,
 		}
 

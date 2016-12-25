@@ -4,70 +4,70 @@ import (
 	"testing"
 )
 
-func TestFloat32s(t *testing.T) {
+func TestFloat64(t *testing.T) {
 
 	tests := []struct{
-		Slice []float32
+		Slice []float64
 	}{
 		{
-			Slice: []float32{},
+			Slice: []float64{},
 		},
 
 
 
 		{
-			Slice: []float32{0.0},
+			Slice: []float64{0.0},
 		},
 		{
-			Slice: []float32{1.0},
+			Slice: []float64{1.0},
 		},
 		{
-			Slice: []float32{2.0},
+			Slice: []float64{2.0},
 		},
 		{
-			Slice: []float32{3.0},
+			Slice: []float64{3.0},
 		},
 		{
-			Slice: []float32{4.0},
+			Slice: []float64{4.0},
 		},
 		{
-			Slice: []float32{5.0},
+			Slice: []float64{5.0},
 		},
 		{
-			Slice: []float32{6.0},
+			Slice: []float64{6.0},
 		},
 		{
-			Slice: []float32{7.0},
+			Slice: []float64{7.0},
 		},
 		{
-			Slice: []float32{8.0},
+			Slice: []float64{8.0},
 		},
 		{
-			Slice: []float32{9.0},
+			Slice: []float64{9.0},
 		},
 		{
-			Slice: []float32{10.0},
-		},
-
-
-
-		{
-			Slice: []float32{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
+			Slice: []float64{10.0},
 		},
 
 
 
 		{
-			Slice: []float32{213.202,18.179,4.000002},
+			Slice: []float64{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
+		},
+
+
+
+		{
+			Slice: []float64{213.202,18.179,4.000002},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]float32(nil), test.Slice...)
+		slice := append([]float64(nil), test.Slice...)
 
-		iterator := Float32s{
+		iterator := Float64{
 			Slice: slice,
 		}
 
@@ -76,13 +76,13 @@ func TestFloat32s(t *testing.T) {
 			continue
 		}
 
-		var actualData []float32
+		var actualData []float64
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum float32
+			var datum float64
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -92,7 +92,7 @@ func TestFloat32s(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*float32)(nil)); nil != err {
+			if err := iterator.Decode((*float64)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -105,7 +105,7 @@ func TestFloat32s(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(float32)
+			datum2, ok := x.(float64)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue

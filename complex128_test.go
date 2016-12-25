@@ -4,79 +4,70 @@ import (
 	"testing"
 )
 
-func TestBools(t *testing.T) {
+func TestComplex128(t *testing.T) {
 
 	tests := []struct{
-		Slice []bool
+		Slice []complex128
 	}{
 		{
-			Slice: []bool{},
+			Slice: []complex128{},
 		},
 
 
 
 		{
-			Slice: []bool{false},
+			Slice: []complex128{0},
 		},
 		{
-			Slice: []bool{true},
-		},
-
-
-
-		{
-			Slice: []bool{false,false},
+			Slice: []complex128{1},
 		},
 		{
-			Slice: []bool{false,true},
+			Slice: []complex128{2},
 		},
 		{
-			Slice: []bool{true,false},
+			Slice: []complex128{3},
 		},
 		{
-			Slice: []bool{true,true},
-		},
-
-
-
-		{
-			Slice: []bool{false,false,false},
+			Slice: []complex128{4},
 		},
 		{
-			Slice: []bool{false,false,true},
+			Slice: []complex128{5},
 		},
 		{
-			Slice: []bool{false,true,false},
+			Slice: []complex128{6},
 		},
 		{
-			Slice: []bool{false,true,true},
+			Slice: []complex128{7},
 		},
 		{
-			Slice: []bool{true,false,false},
+			Slice: []complex128{8},
 		},
 		{
-			Slice: []bool{true,false,true},
+			Slice: []complex128{9},
 		},
 		{
-			Slice: []bool{true,true,false},
-		},
-		{
-			Slice: []bool{true,true,true},
+			Slice: []complex128{10},
 		},
 
 
 
 		{
-			Slice: []bool{true,false,false,true,false,true,true,false,true,true,true},
+			Slice: []complex128{0,1,2,3,4,5,6,7,8,9,10},
+		},
+
+
+
+		{
+			Slice: []complex128{213,18,4},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]bool(nil), test.Slice...)
+		slice := append([]complex128(nil), test.Slice...)
 
-		iterator := Bools{
+		iterator := Complex128{
 			Slice: slice,
 		}
 
@@ -85,13 +76,13 @@ func TestBools(t *testing.T) {
 			continue
 		}
 
-		var actualData []bool
+		var actualData []complex128
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum bool
+			var datum complex128
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -101,7 +92,7 @@ func TestBools(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*bool)(nil)); nil != err {
+			if err := iterator.Decode((*complex128)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -114,7 +105,7 @@ func TestBools(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(bool)
+			datum2, ok := x.(complex128)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue

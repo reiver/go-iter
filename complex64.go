@@ -5,22 +5,22 @@ import (
 	"sync"
 )
 
-type Float32s struct {
-	Slice []float32
+type Complex64 struct {
+	Slice []complex64
 	err error
 	index int
-	datum float32
+	datum complex64
 	mutex sync.RWMutex
 }
 
-func (receiver *Float32s) Close() error {
+func (receiver *Complex64) Close() error {
 	return nil
 }
 
 // Decode stores the next datum in the data represented by the empty interface value `x`.
 // If `x` is nil, the value will be discarded.
 // Otherwise, the value underlying `x` must be a pointer to the correct type for the next datum.
-func (receiver *Float32s) Decode(x interface{}) error {
+func (receiver *Complex64) Decode(x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -29,7 +29,7 @@ func (receiver *Float32s) Decode(x interface{}) error {
 	defer receiver.mutex.RUnlock()
 
 	switch p := x.(type) {
-	case *float32:
+	case *complex64:
 		if nil == p {
 			return nil
 		}
@@ -50,7 +50,7 @@ func (receiver *Float32s) Decode(x interface{}) error {
 
 // Err returns the error, if an error was encountered during an iteration.
 // If no error was encountered during an iteration, then Err returns nil.
-func (receiver *Float32s) Err() error {
+func (receiver *Complex64) Err() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -75,7 +75,7 @@ func (receiver *Float32s) Err() error {
 //
 // Err should be called to distinguish between the two cases where the Next
 // method can return false: 'no next datum' and 'an error was encountered'.
-func (receiver *Float32s) Next() bool {
+func (receiver *Complex64) Next() bool {
 	if nil == receiver {
 		return false
 	}

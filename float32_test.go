@@ -4,59 +4,70 @@ import (
 	"testing"
 )
 
-func TestNadas(t *testing.T) {
+func TestFloat32(t *testing.T) {
 
 	tests := []struct{
-		Slice []struct{}
+		Slice []float32
 	}{
 		{
-			Slice: []struct{}{
-				// Nothing here.
-			},
+			Slice: []float32{},
+		},
+
+
+
+		{
+			Slice: []float32{0.0},
 		},
 		{
-			Slice: []struct{}{
-				struct{}{},
-			},
+			Slice: []float32{1.0},
 		},
 		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-			},
+			Slice: []float32{2.0},
 		},
 		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
+			Slice: []float32{3.0},
 		},
 		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
+			Slice: []float32{4.0},
 		},
 		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
+			Slice: []float32{5.0},
+		},
+		{
+			Slice: []float32{6.0},
+		},
+		{
+			Slice: []float32{7.0},
+		},
+		{
+			Slice: []float32{8.0},
+		},
+		{
+			Slice: []float32{9.0},
+		},
+		{
+			Slice: []float32{10.0},
+		},
+
+
+
+		{
+			Slice: []float32{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
+		},
+
+
+
+		{
+			Slice: []float32{213.202,18.179,4.000002},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]struct{}(nil), test.Slice...)
+		slice := append([]float32(nil), test.Slice...)
 
-		iterator := Nadas{
+		iterator := Float32{
 			Slice: slice,
 		}
 
@@ -65,13 +76,13 @@ func TestNadas(t *testing.T) {
 			continue
 		}
 
-		var actualData []struct{}
+		var actualData []float32
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum struct{}
+			var datum float32
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -81,7 +92,7 @@ func TestNadas(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*struct{})(nil)); nil != err {
+			if err := iterator.Decode((*float32)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -94,7 +105,7 @@ func TestNadas(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(struct{})
+			datum2, ok := x.(float32)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue

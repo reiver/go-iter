@@ -4,70 +4,70 @@ import (
 	"testing"
 )
 
-func TestComplex128s(t *testing.T) {
+func TestComplex64(t *testing.T) {
 
 	tests := []struct{
-		Slice []complex128
+		Slice []complex64
 	}{
 		{
-			Slice: []complex128{},
+			Slice: []complex64{},
 		},
 
 
 
 		{
-			Slice: []complex128{0},
+			Slice: []complex64{0},
 		},
 		{
-			Slice: []complex128{1},
+			Slice: []complex64{1},
 		},
 		{
-			Slice: []complex128{2},
+			Slice: []complex64{2},
 		},
 		{
-			Slice: []complex128{3},
+			Slice: []complex64{3},
 		},
 		{
-			Slice: []complex128{4},
+			Slice: []complex64{4},
 		},
 		{
-			Slice: []complex128{5},
+			Slice: []complex64{5},
 		},
 		{
-			Slice: []complex128{6},
+			Slice: []complex64{6},
 		},
 		{
-			Slice: []complex128{7},
+			Slice: []complex64{7},
 		},
 		{
-			Slice: []complex128{8},
+			Slice: []complex64{8},
 		},
 		{
-			Slice: []complex128{9},
+			Slice: []complex64{9},
 		},
 		{
-			Slice: []complex128{10},
-		},
-
-
-
-		{
-			Slice: []complex128{0,1,2,3,4,5,6,7,8,9,10},
+			Slice: []complex64{10},
 		},
 
 
 
 		{
-			Slice: []complex128{213,18,4},
+			Slice: []complex64{0,1,2,3,4,5,6,7,8,9,10},
+		},
+
+
+
+		{
+			Slice: []complex64{213,18,4},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]complex128(nil), test.Slice...)
+		slice := append([]complex64(nil), test.Slice...)
 
-		iterator := Complex128s{
+		iterator := Complex64{
 			Slice: slice,
 		}
 
@@ -76,13 +76,13 @@ func TestComplex128s(t *testing.T) {
 			continue
 		}
 
-		var actualData []complex128
+		var actualData []complex64
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum complex128
+			var datum complex64
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -92,7 +92,7 @@ func TestComplex128s(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*complex128)(nil)); nil != err {
+			if err := iterator.Decode((*complex64)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -105,7 +105,7 @@ func TestComplex128s(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(complex128)
+			datum2, ok := x.(complex64)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue

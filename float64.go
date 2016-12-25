@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-type Float64s struct {
+type Float64 struct {
 	Slice []float64
 	err error
 	index int
@@ -13,14 +13,14 @@ type Float64s struct {
 	mutex sync.RWMutex
 }
 
-func (receiver *Float64s) Close() error {
+func (receiver *Float64) Close() error {
 	return nil
 }
 
 // Decode stores the next datum in the data represented by the empty interface value `x`.
 // If `x` is nil, the value will be discarded.
 // Otherwise, the value underlying `x` must be a pointer to the correct type for the next datum.
-func (receiver *Float64s) Decode(x interface{}) error {
+func (receiver *Float64) Decode(x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -50,7 +50,7 @@ func (receiver *Float64s) Decode(x interface{}) error {
 
 // Err returns the error, if an error was encountered during an iteration.
 // If no error was encountered during an iteration, then Err returns nil.
-func (receiver *Float64s) Err() error {
+func (receiver *Float64) Err() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -75,7 +75,7 @@ func (receiver *Float64s) Err() error {
 //
 // Err should be called to distinguish between the two cases where the Next
 // method can return false: 'no next datum' and 'an error was encountered'.
-func (receiver *Float64s) Next() bool {
+func (receiver *Float64) Next() bool {
 	if nil == receiver {
 		return false
 	}

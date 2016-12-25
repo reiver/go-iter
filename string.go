@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-type Strings struct {
+type String struct {
 	Slice []string
 	err error
 	index int
@@ -13,14 +13,14 @@ type Strings struct {
 	mutex sync.RWMutex
 }
 
-func (receiver *Strings) Close() error {
+func (receiver *String) Close() error {
 	return nil
 }
 
 // Decode stores the next datum in the data represented by the empty interface value `x`.
 // If `x` is nil, the value will be discarded.
 // Otherwise, the value underlying `x` must be a pointer to the correct type for the next datum.
-func (receiver *Strings) Decode(x interface{}) error {
+func (receiver *String) Decode(x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -50,7 +50,7 @@ func (receiver *Strings) Decode(x interface{}) error {
 
 // Err returns the error, if an error was encountered during an iteration.
 // If no error was encountered during an iteration, then Err returns nil.
-func (receiver *Strings) Err() error {
+func (receiver *String) Err() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -75,7 +75,7 @@ func (receiver *Strings) Err() error {
 //
 // Err should be called to distinguish between the two cases where the Next
 // method can return false: 'no next datum' and 'an error was encountered'.
-func (receiver *Strings) Next() bool {
+func (receiver *String) Next() bool {
 	if nil == receiver {
 		return false
 	}

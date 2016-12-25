@@ -1,43 +1,82 @@
 package iter
 
 import (
-	"time"
-
 	"testing"
 )
 
-func TestTimes(t *testing.T) {
+func TestBool(t *testing.T) {
 
 	tests := []struct{
-		Slice []time.Time
+		Slice []bool
 	}{
 		{
-			Slice: []time.Time{},
+			Slice: []bool{},
 		},
 
 
 
 		{
-			Slice: []time.Time{ time.Now() },
+			Slice: []bool{false},
+		},
+		{
+			Slice: []bool{true},
 		},
 
 
 
 		{
-			Slice: []time.Time{
-				time.Now().Add( -1 * time.Hour ),
-				time.Now().Add( -2 * time.Hour ),
-				time.Now().Add( -3 * time.Hour ),
-			},
+			Slice: []bool{false,false},
+		},
+		{
+			Slice: []bool{false,true},
+		},
+		{
+			Slice: []bool{true,false},
+		},
+		{
+			Slice: []bool{true,true},
+		},
+
+
+
+		{
+			Slice: []bool{false,false,false},
+		},
+		{
+			Slice: []bool{false,false,true},
+		},
+		{
+			Slice: []bool{false,true,false},
+		},
+		{
+			Slice: []bool{false,true,true},
+		},
+		{
+			Slice: []bool{true,false,false},
+		},
+		{
+			Slice: []bool{true,false,true},
+		},
+		{
+			Slice: []bool{true,true,false},
+		},
+		{
+			Slice: []bool{true,true,true},
+		},
+
+
+
+		{
+			Slice: []bool{true,false,false,true,false,true,true,false,true,true,true},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]time.Time(nil), test.Slice...)
+		slice := append([]bool(nil), test.Slice...)
 
-		iterator := Times{
+		iterator := Bool{
 			Slice: slice,
 		}
 
@@ -46,13 +85,13 @@ func TestTimes(t *testing.T) {
 			continue
 		}
 
-		var actualData []time.Time
+		var actualData []bool
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum time.Time
+			var datum bool
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -62,7 +101,7 @@ func TestTimes(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*time.Time)(nil)); nil != err {
+			if err := iterator.Decode((*bool)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -75,7 +114,7 @@ func TestTimes(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(time.Time)
+			datum2, ok := x.(bool)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue
@@ -104,7 +143,7 @@ func TestTimes(t *testing.T) {
 		for datumNumber, expected := range test.Slice {
 			actual := actualData[datumNumber]
 
-			if !expected.Equal(actual) {
+			if expected != actual {
 				t.Errorf("For test #%d and datum #%d, expected %v, but actually got %v.", testNumber, datumNumber, expected, actual)
 				continue
 			}

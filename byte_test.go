@@ -4,70 +4,70 @@ import (
 	"testing"
 )
 
-func TestFloat64s(t *testing.T) {
+func TestByte(t *testing.T) {
 
 	tests := []struct{
-		Slice []float64
+		Slice []byte
 	}{
 		{
-			Slice: []float64{},
+			Slice: []byte{},
 		},
 
 
 
 		{
-			Slice: []float64{0.0},
+			Slice: []byte{0},
 		},
 		{
-			Slice: []float64{1.0},
+			Slice: []byte{1},
 		},
 		{
-			Slice: []float64{2.0},
+			Slice: []byte{2},
 		},
 		{
-			Slice: []float64{3.0},
+			Slice: []byte{3},
 		},
 		{
-			Slice: []float64{4.0},
+			Slice: []byte{4},
 		},
 		{
-			Slice: []float64{5.0},
+			Slice: []byte{5},
 		},
 		{
-			Slice: []float64{6.0},
+			Slice: []byte{6},
 		},
 		{
-			Slice: []float64{7.0},
+			Slice: []byte{7},
 		},
 		{
-			Slice: []float64{8.0},
+			Slice: []byte{8},
 		},
 		{
-			Slice: []float64{9.0},
+			Slice: []byte{9},
 		},
 		{
-			Slice: []float64{10.0},
-		},
-
-
-
-		{
-			Slice: []float64{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
+			Slice: []byte{10},
 		},
 
 
 
 		{
-			Slice: []float64{213.202,18.179,4.000002},
+			Slice: []byte{0,1,2,3,4,5,6,7,8,9,10},
+		},
+
+
+
+		{
+			Slice: []byte{213,18,4},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]float64(nil), test.Slice...)
+		slice := append([]byte(nil), test.Slice...)
 
-		iterator := Float64s{
+		iterator := Byte{
 			Slice: slice,
 		}
 
@@ -76,13 +76,13 @@ func TestFloat64s(t *testing.T) {
 			continue
 		}
 
-		var actualData []float64
+		var actualData []byte
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum float64
+			var datum byte
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -92,7 +92,7 @@ func TestFloat64s(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*float64)(nil)); nil != err {
+			if err := iterator.Decode((*byte)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -105,7 +105,7 @@ func TestFloat64s(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(float64)
+			datum2, ok := x.(byte)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue

@@ -1,73 +1,43 @@
 package iter
 
 import (
+	"time"
+
 	"testing"
 )
 
-func TestBytes(t *testing.T) {
+func TestTime(t *testing.T) {
 
 	tests := []struct{
-		Slice []byte
+		Slice []time.Time
 	}{
 		{
-			Slice: []byte{},
+			Slice: []time.Time{},
 		},
 
 
 
 		{
-			Slice: []byte{0},
-		},
-		{
-			Slice: []byte{1},
-		},
-		{
-			Slice: []byte{2},
-		},
-		{
-			Slice: []byte{3},
-		},
-		{
-			Slice: []byte{4},
-		},
-		{
-			Slice: []byte{5},
-		},
-		{
-			Slice: []byte{6},
-		},
-		{
-			Slice: []byte{7},
-		},
-		{
-			Slice: []byte{8},
-		},
-		{
-			Slice: []byte{9},
-		},
-		{
-			Slice: []byte{10},
+			Slice: []time.Time{ time.Now() },
 		},
 
 
 
 		{
-			Slice: []byte{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []byte{213,18,4},
+			Slice: []time.Time{
+				time.Now().Add( -1 * time.Hour ),
+				time.Now().Add( -2 * time.Hour ),
+				time.Now().Add( -3 * time.Hour ),
+			},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]byte(nil), test.Slice...)
+		slice := append([]time.Time(nil), test.Slice...)
 
-		iterator := Bytes{
+		iterator := Time{
 			Slice: slice,
 		}
 
@@ -76,13 +46,13 @@ func TestBytes(t *testing.T) {
 			continue
 		}
 
-		var actualData []byte
+		var actualData []time.Time
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum byte
+			var datum time.Time
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -92,7 +62,7 @@ func TestBytes(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*byte)(nil)); nil != err {
+			if err := iterator.Decode((*time.Time)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -105,7 +75,7 @@ func TestBytes(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(byte)
+			datum2, ok := x.(time.Time)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue
@@ -134,7 +104,7 @@ func TestBytes(t *testing.T) {
 		for datumNumber, expected := range test.Slice {
 			actual := actualData[datumNumber]
 
-			if expected != actual {
+			if !expected.Equal(actual) {
 				t.Errorf("For test #%d and datum #%d, expected %v, but actually got %v.", testNumber, datumNumber, expected, actual)
 				continue
 			}

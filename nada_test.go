@@ -4,70 +4,59 @@ import (
 	"testing"
 )
 
-func TestComplex64s(t *testing.T) {
+func TestNada(t *testing.T) {
 
 	tests := []struct{
-		Slice []complex64
+		Slice []struct{}
 	}{
 		{
-			Slice: []complex64{},
-		},
-
-
-
-		{
-			Slice: []complex64{0},
+			Slice: []struct{}{
+				// Nothing here.
+			},
 		},
 		{
-			Slice: []complex64{1},
+			Slice: []struct{}{
+				struct{}{},
+			},
 		},
 		{
-			Slice: []complex64{2},
+			Slice: []struct{}{
+				struct{}{},
+				struct{}{},
+			},
 		},
 		{
-			Slice: []complex64{3},
+			Slice: []struct{}{
+				struct{}{},
+				struct{}{},
+				struct{}{},
+			},
 		},
 		{
-			Slice: []complex64{4},
+			Slice: []struct{}{
+				struct{}{},
+				struct{}{},
+				struct{}{},
+				struct{}{},
+			},
 		},
 		{
-			Slice: []complex64{5},
-		},
-		{
-			Slice: []complex64{6},
-		},
-		{
-			Slice: []complex64{7},
-		},
-		{
-			Slice: []complex64{8},
-		},
-		{
-			Slice: []complex64{9},
-		},
-		{
-			Slice: []complex64{10},
-		},
-
-
-
-		{
-			Slice: []complex64{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []complex64{213,18,4},
+			Slice: []struct{}{
+				struct{}{},
+				struct{}{},
+				struct{}{},
+				struct{}{},
+				struct{}{},
+			},
 		},
 	}
 
 
 	for testNumber, test := range tests {
 
-		slice := append([]complex64(nil), test.Slice...)
+		slice := append([]struct{}(nil), test.Slice...)
 
-		iterator := Complex64s{
+		iterator := Nada{
 			Slice: slice,
 		}
 
@@ -76,13 +65,13 @@ func TestComplex64s(t *testing.T) {
 			continue
 		}
 
-		var actualData []complex64
+		var actualData []struct{}
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum complex64
+			var datum struct{}
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -92,7 +81,7 @@ func TestComplex64s(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*complex64)(nil)); nil != err {
+			if err := iterator.Decode((*struct{})(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -105,7 +94,7 @@ func TestComplex64s(t *testing.T) {
 				continue
 			}
 
-			datum2, ok := x.(complex64)
+			datum2, ok := x.(struct{})
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 				continue
