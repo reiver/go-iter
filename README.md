@@ -18,7 +18,7 @@ Online documentation, which includes examples, can be found at: http://godoc.org
 
 ## Example
 
-```
+```go
 var slice []string = []string {
 	"apple",
 	"banana",
