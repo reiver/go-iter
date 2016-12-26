@@ -81,6 +81,34 @@ func TestUint16(t *testing.T) {
 
 
 			{
+				var datum2 uint32
+
+				if err := iterator.Decode(&datum2); nil != err {
+					t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+					continue
+				}
+
+				if expected, actual := uint32(datum), datum2; expected != actual {
+					t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+					continue
+				}
+			}
+			{
+				var datum2 uint64
+
+				if err := iterator.Decode(&datum2); nil != err {
+					t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+					continue
+				}
+
+				if expected, actual := uint64(datum), datum2; expected != actual {
+					t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+					continue
+				}
+			}
+
+
+			{
 				var x interface{}
 
 				if err := iterator.Decode(&x); nil != err {
