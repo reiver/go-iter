@@ -9,8 +9,8 @@ type Int64 struct {
 	Slice []int64
 	err error
 	index int
-	datum int64
 	mutex sync.RWMutex
+	datum int64
 }
 
 func (receiver *Int64) Close() error {

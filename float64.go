@@ -9,8 +9,8 @@ type Float64 struct {
 	Slice []float64
 	err error
 	index int
-	datum float64
 	mutex sync.RWMutex
+	datum float64
 }
 
 func (receiver *Float64) Close() error {

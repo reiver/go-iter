@@ -9,8 +9,8 @@ type Uint8 struct {
 	Slice []uint8
 	err error
 	index int
-	datum uint8
 	mutex sync.RWMutex
+	datum uint8
 }
 
 func (receiver *Uint8) Close() error {

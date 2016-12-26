@@ -9,8 +9,8 @@ type Byte struct {
 	Slice []byte
 	err error
 	index int
-	datum byte
 	mutex sync.RWMutex
+	datum byte
 }
 
 func (receiver *Byte) Close() error {

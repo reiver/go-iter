@@ -9,8 +9,8 @@ type Nada struct {
 	Slice []struct{}
 	err error
 	index int
-	datum struct{}
 	mutex sync.RWMutex
+	datum struct{}
 }
 
 func (receiver *Nada) Close() error {

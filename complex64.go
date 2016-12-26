@@ -9,8 +9,8 @@ type Complex64 struct {
 	Slice []complex64
 	err error
 	index int
-	datum complex64
 	mutex sync.RWMutex
+	datum complex64
 }
 
 func (receiver *Complex64) Close() error {

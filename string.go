@@ -9,8 +9,8 @@ type String struct {
 	Slice []string
 	err error
 	index int
-	datum string
 	mutex sync.RWMutex
+	datum string
 }
 
 func (receiver *String) Close() error {

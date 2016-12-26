@@ -10,8 +10,8 @@ type Time struct {
 	Slice []time.Time
 	err error
 	index int
-	datum time.Time
 	mutex sync.RWMutex
+	datum time.Time
 }
 
 func (receiver *Time) Close() error {

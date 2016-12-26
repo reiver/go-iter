@@ -9,8 +9,8 @@ type Bool struct {
 	Slice []bool
 	err error
 	index int
-	datum bool
 	mutex sync.RWMutex
+	datum bool
 }
 
 func (receiver *Bool) Close() error {
