@@ -10,6 +10,7 @@ type Uint64 struct {
 	err error
 	index int
 	mutex sync.RWMutex
+	closed bool
 	datum uint64
 }
 
@@ -17,6 +18,11 @@ func (receiver *Uint64) Close() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	receiver.closed = true
 
 	return nil
 }
@@ -88,6 +94,10 @@ func (receiver *Uint64) Next() bool {
 	defer receiver.mutex.Unlock()
 
 	if nil != receiver.err {
+		return false
+	}
+
+	if receiver.closed {
 		return false
 	}
 

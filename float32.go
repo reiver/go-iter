@@ -10,6 +10,7 @@ type Float32 struct {
 	err error
 	index int
 	mutex sync.RWMutex
+	closed bool
 	datum float32
 }
 
@@ -17,6 +18,11 @@ func (receiver *Float32) Close() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	receiver.closed = true
 
 	return nil
 }
@@ -88,6 +94,10 @@ func (receiver *Float32) Next() bool {
 	defer receiver.mutex.Unlock()
 
 	if nil != receiver.err {
+		return false
+	}
+
+	if receiver.closed {
 		return false
 	}
 
