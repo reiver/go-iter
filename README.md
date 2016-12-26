@@ -33,7 +33,7 @@ defer iterator.Close()
 
 for iterator.Next() {
 
-	var datum string
+	var datum string // Could have also used: var datum interface{}
 
 	if err := iterator.Decode(&datum); nil != err {
 		return err

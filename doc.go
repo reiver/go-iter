@@ -23,7 +23,7 @@ For example, we can turn a slice into an iterator, with code like the following:
 	
 	for iterator.Next() {
 	
-		var datum string
+		var datum string // Could have also used: var datum interface{}
 	
 		if err := iterator.Decode(&datum); nil != err {
 			return err
