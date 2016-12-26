@@ -14,6 +14,10 @@ type String struct {
 }
 
 func (receiver *String) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

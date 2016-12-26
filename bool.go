@@ -14,6 +14,10 @@ type Bool struct {
 }
 
 func (receiver *Bool) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

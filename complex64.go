@@ -14,6 +14,10 @@ type Complex64 struct {
 }
 
 func (receiver *Complex64) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

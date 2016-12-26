@@ -14,6 +14,10 @@ type Uint32 struct {
 }
 
 func (receiver *Uint32) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

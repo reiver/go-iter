@@ -15,6 +15,10 @@ type Time struct {
 }
 
 func (receiver *Time) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

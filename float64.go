@@ -14,6 +14,10 @@ type Float64 struct {
 }
 
 func (receiver *Float64) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

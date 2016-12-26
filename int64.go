@@ -14,6 +14,10 @@ type Int64 struct {
 }
 
 func (receiver *Int64) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

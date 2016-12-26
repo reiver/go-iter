@@ -14,6 +14,10 @@ type Uint8 struct {
 }
 
 func (receiver *Uint8) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

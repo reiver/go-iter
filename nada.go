@@ -14,6 +14,10 @@ type Nada struct {
 }
 
 func (receiver *Nada) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 

@@ -14,6 +14,10 @@ type Byte struct {
 }
 
 func (receiver *Byte) Close() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return nil
 }
 
