@@ -128,8 +128,29 @@ func TestByte(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestByteClose(t *testing.T) {
+
+	tests := []struct{
+		Slice []byte
+	}{}
+
+	for _, slice := range byteTestSlices {
+		sliceCopy := append([]byte(nil), slice...)
+
+		test := struct{
+			Slice []byte
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]byte(nil), test.Slice...)
@@ -154,10 +175,10 @@ func TestByte(t *testing.T) {
 				t.Errorf("For test #%d and close test #%d, expected %t, but actually got %t.", testNumber, closeTestNumber, expected, actual)
 				continue
 			}
-
 		}
 	}
 }
+
 
 func TestByteErrNilReceiver(t *testing.T) {
 

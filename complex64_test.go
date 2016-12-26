@@ -126,8 +126,29 @@ func TestComplex64(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestComplex64Close(t *testing.T) {
+
+	tests := []struct{
+		Slice []complex64
+	}{}
+
+	for _, slice := range complex64TestSlices {
+		sliceCopy := append([]complex64(nil), slice...)
+
+		test := struct{
+			Slice []complex64
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]complex64(nil), test.Slice...)

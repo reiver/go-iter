@@ -120,8 +120,29 @@ func TestTime(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestTimeClose(t *testing.T) {
+
+	tests := []struct{
+		Slice []time.Time
+	}{}
+
+	for _, slice := range timeTestSlices {
+		sliceCopy := append([]time.Time(nil), slice...)
+
+		test := struct{
+			Slice []time.Time
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]time.Time(nil), test.Slice...)

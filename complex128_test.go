@@ -126,8 +126,29 @@ func TestComplex128(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestComplex128Close(t *testing.T) {
+
+	tests := []struct{
+		Slice []complex128
+	}{}
+
+	for _, slice := range complex128TestSlices {
+		sliceCopy := append([]complex128(nil), slice...)
+
+		test := struct{
+			Slice []complex128
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]complex128(nil), test.Slice...)

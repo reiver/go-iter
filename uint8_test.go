@@ -126,8 +126,29 @@ func TestUint8(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestUint8Close(t *testing.T) {
+
+	tests := []struct{
+		Slice []uint8
+	}{}
+
+	for _, slice := range uint8TestSlices {
+		sliceCopy := append([]uint8(nil), slice...)
+
+		test := struct{
+			Slice []uint8
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]uint8(nil), test.Slice...)

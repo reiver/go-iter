@@ -126,8 +126,29 @@ func TestInt64(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestInt64Close(t *testing.T) {
+
+	tests := []struct{
+		Slice []int64
+	}{}
+
+	for _, slice := range int64TestSlices {
+		sliceCopy := append([]int64(nil), slice...)
+
+		test := struct{
+			Slice []int64
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]int64(nil), test.Slice...)

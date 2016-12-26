@@ -126,8 +126,29 @@ func TestString(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestStringClose(t *testing.T) {
+
+	tests := []struct{
+		Slice []string
+	}{}
+
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
+
+		test := struct{
+			Slice []string
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]string(nil), test.Slice...)

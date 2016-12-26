@@ -126,8 +126,29 @@ func TestFloat64(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestFloat64Close(t *testing.T) {
+
+	tests := []struct{
+		Slice []float64
+	}{}
+
+	for _, slice := range float64TestSlices {
+		sliceCopy := append([]float64(nil), slice...)
+
+		test := struct{
+			Slice []float64
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]float64(nil), test.Slice...)

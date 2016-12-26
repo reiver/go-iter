@@ -138,8 +138,29 @@ func TestNada(t *testing.T) {
 			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
 			continue
 		}
+	}
+}
+
+func TestNadaClose(t *testing.T) {
+
+	tests := []struct{
+		Slice []struct{}
+	}{}
+
+	for _, slice := range nadaTestSlices {
+		sliceCopy := append([]struct{}(nil), slice...)
+
+		test := struct{
+			Slice []struct{}
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
 
 
+	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]struct{}(nil), test.Slice...)
