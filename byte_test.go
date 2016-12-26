@@ -1,6 +1,8 @@
 package iter
 
 import (
+	"bytes"
+
 	"testing"
 )
 
@@ -193,6 +195,20 @@ func TestByteErrNilReceiver(t *testing.T) {
 		actual := iterator.Next()
 		if expected := false; expected != actual {
 			t.Errorf("Expected an %t, but actually got %t.", expected, actual)
+			return
+		}
+	}
+
+	{
+		var buffer bytes.Buffer
+
+		_, err := iterator.WriteTo(&buffer)
+		if nil == err {
+			t.Errorf("Expected an error, but did not actually get one: %v", err)
+			return
+		}
+		if expected, actual := errNilReceiver, err; expected != actual {
+			t.Errorf("Expected an (%T) %q, but actually got (%T) %q.", expected, expected, actual, actual)
 			return
 		}
 	}
