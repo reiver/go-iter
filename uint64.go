@@ -45,7 +45,7 @@ func (receiver *Uint64) Decode(x interface{}) error {
 		}
 
 		*p = receiver.datum
-		case *interface{}:
+	case *interface{}:
 		if nil == p {
 			return nil
 		}
