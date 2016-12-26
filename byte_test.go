@@ -6,62 +6,44 @@ import (
 	"testing"
 )
 
+var (
+	byteTestSlices = [][]byte{
+		[]byte{},
+
+		[]byte{0},
+		[]byte{1},
+		[]byte{2},
+		[]byte{3},
+		[]byte{4},
+		[]byte{5},
+		[]byte{6},
+		[]byte{7},
+		[]byte{8},
+		[]byte{9},
+		[]byte{10},
+
+		[]byte{0,1,2,3,4,5,6,7,8,9,10},
+
+		[]byte{213,18,4},
+	}
+)
+
 func TestByte(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
-	}{
-		{
-			Slice: []byte{},
-		},
+	}{}
 
+	for _, slice := range byteTestSlices {
+		sliceCopy := append([]byte(nil), slice...)
 
+		test := struct{
+			Slice []byte
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []byte{0},
-		},
-		{
-			Slice: []byte{1},
-		},
-		{
-			Slice: []byte{2},
-		},
-		{
-			Slice: []byte{3},
-		},
-		{
-			Slice: []byte{4},
-		},
-		{
-			Slice: []byte{5},
-		},
-		{
-			Slice: []byte{6},
-		},
-		{
-			Slice: []byte{7},
-		},
-		{
-			Slice: []byte{8},
-		},
-		{
-			Slice: []byte{9},
-		},
-		{
-			Slice: []byte{10},
-		},
-
-
-
-		{
-			Slice: []byte{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []byte{213,18,4},
-		},
+		tests = append(tests, test)
 	}
 
 

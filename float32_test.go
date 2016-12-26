@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	float32TestSlices = [][]float32{
+		[]float32{},
+
+		[]float32{0.0},
+		[]float32{1.0},
+		[]float32{2.0},
+		[]float32{3.0},
+		[]float32{4.0},
+		[]float32{5.0},
+		[]float32{6.0},
+		[]float32{7.0},
+		[]float32{8.0},
+		[]float32{9.0},
+		[]float32{10.0},
+
+		[]float32{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
+
+		[]float32{213.202,18.179,4.000002},
+	}
+)
+
 func TestFloat32(t *testing.T) {
 
 	tests := []struct{
 		Slice []float32
-	}{
-		{
-			Slice: []float32{},
-		},
+	}{}
 
+	for _, slice := range float32TestSlices {
+		sliceCopy := append([]float32(nil), slice...)
 
+		test := struct{
+			Slice []float32
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []float32{0.0},
-		},
-		{
-			Slice: []float32{1.0},
-		},
-		{
-			Slice: []float32{2.0},
-		},
-		{
-			Slice: []float32{3.0},
-		},
-		{
-			Slice: []float32{4.0},
-		},
-		{
-			Slice: []float32{5.0},
-		},
-		{
-			Slice: []float32{6.0},
-		},
-		{
-			Slice: []float32{7.0},
-		},
-		{
-			Slice: []float32{8.0},
-		},
-		{
-			Slice: []float32{9.0},
-		},
-		{
-			Slice: []float32{10.0},
-		},
-
-
-
-		{
-			Slice: []float32{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
-		},
-
-
-
-		{
-			Slice: []float32{213.202,18.179,4.000002},
-		},
+		tests = append(tests, test)
 	}
 
 

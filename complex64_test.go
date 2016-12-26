@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	complex64TestSlices = [][]complex64{
+		[]complex64{},
+
+		[]complex64{0},
+		[]complex64{1},
+		[]complex64{2},
+		[]complex64{3},
+		[]complex64{4},
+		[]complex64{5},
+		[]complex64{6},
+		[]complex64{7},
+		[]complex64{8},
+		[]complex64{9},
+		[]complex64{10},
+
+		[]complex64{0,1,2,3,4,5,6,7,8,9,10},
+
+		[]complex64{213,18,4},
+	}
+)
+
 func TestComplex64(t *testing.T) {
 
 	tests := []struct{
 		Slice []complex64
-	}{
-		{
-			Slice: []complex64{},
-		},
+	}{}
 
+	for _, slice := range complex64TestSlices {
+		sliceCopy := append([]complex64(nil), slice...)
 
+		test := struct{
+			Slice []complex64
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []complex64{0},
-		},
-		{
-			Slice: []complex64{1},
-		},
-		{
-			Slice: []complex64{2},
-		},
-		{
-			Slice: []complex64{3},
-		},
-		{
-			Slice: []complex64{4},
-		},
-		{
-			Slice: []complex64{5},
-		},
-		{
-			Slice: []complex64{6},
-		},
-		{
-			Slice: []complex64{7},
-		},
-		{
-			Slice: []complex64{8},
-		},
-		{
-			Slice: []complex64{9},
-		},
-		{
-			Slice: []complex64{10},
-		},
-
-
-
-		{
-			Slice: []complex64{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []complex64{213,18,4},
-		},
+		tests = append(tests, test)
 	}
 
 

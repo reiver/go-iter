@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	uint8TestSlices = [][]uint8{
+		[]uint8{},
+
+		[]uint8{0},
+		[]uint8{1},
+		[]uint8{2},
+		[]uint8{3},
+		[]uint8{4},
+		[]uint8{5},
+		[]uint8{6},
+		[]uint8{7},
+		[]uint8{8},
+		[]uint8{9},
+		[]uint8{10},
+
+		[]uint8{0,1,2,3,4,5,6,7,8,9,10},
+
+		[]uint8{213,18,4},
+	}
+)
+
 func TestUint8(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint8
-	}{
-		{
-			Slice: []uint8{},
-		},
+	}{}
 
+	for _, slice := range uint8TestSlices {
+		sliceCopy := append([]uint8(nil), slice...)
 
+		test := struct{
+			Slice []uint8
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []uint8{0},
-		},
-		{
-			Slice: []uint8{1},
-		},
-		{
-			Slice: []uint8{2},
-		},
-		{
-			Slice: []uint8{3},
-		},
-		{
-			Slice: []uint8{4},
-		},
-		{
-			Slice: []uint8{5},
-		},
-		{
-			Slice: []uint8{6},
-		},
-		{
-			Slice: []uint8{7},
-		},
-		{
-			Slice: []uint8{8},
-		},
-		{
-			Slice: []uint8{9},
-		},
-		{
-			Slice: []uint8{10},
-		},
-
-
-
-		{
-			Slice: []uint8{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []uint8{213,18,4},
-		},
+		tests = append(tests, test)
 	}
 
 

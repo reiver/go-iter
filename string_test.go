@@ -6,56 +6,42 @@ import (
 	"testing"
 )
 
+var (
+	stringTestSlices = [][]string{
+		[]string{},
+
+		[]string{"apple"},
+		[]string{"banana"},
+		[]string{"cherry"},
+
+		[]string{"ONE"},
+		[]string{"TWO"},
+		[]string{"THREE"},
+		[]string{"FOUR"},
+		[]string{"FIVE"},
+
+		[]string{"apple","banana","cherry"},
+
+		[]string{"ONE","TWO","THREE","FOUR","FIVE"},
+	}
+)
+
 func TestString(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
-	}{
-		{
-			Slice: []string{},
-		},
+	}{}
 
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
 
+		test := struct{
+			Slice []string
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []string{"apple"},
-		},
-		{
-			Slice: []string{"banana"},
-		},
-		{
-			Slice: []string{"cherry"},
-		},
-
-
-
-		{
-			Slice: []string{"ONE"},
-		},
-		{
-			Slice: []string{"TWO"},
-		},
-		{
-			Slice: []string{"THREE"},
-		},
-		{
-			Slice: []string{"FOUR"},
-		},
-		{
-			Slice: []string{"FIVE"},
-		},
-
-
-
-		{
-			Slice: []string{"apple","banana","cherry"},
-		},
-
-
-
-		{
-			Slice: []string{"ONE","TWO","THREE","FOUR","FIVE"},
-		},
+		tests = append(tests, test)
 	}
 
 

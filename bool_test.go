@@ -4,71 +4,47 @@ import (
 	"testing"
 )
 
+var (
+	boolTestSlices = [][]bool{
+		[]bool{},
+
+		[]bool{false},
+		[]bool{true},
+
+		[]bool{false,false},
+		[]bool{false,true},
+		[]bool{true,false},
+		[]bool{true,true},
+
+		[]bool{false,false,false},
+		[]bool{false,false,true},
+		[]bool{false,true,false},
+		[]bool{false,true,true},
+		[]bool{true,false,false},
+		[]bool{true,false,true},
+		[]bool{true,true,false},
+		[]bool{true,true,true},
+
+		[]bool{true,false,false,true,false,true,true,false,true,true,true},
+	}
+)
+
 func TestBool(t *testing.T) {
 
 	tests := []struct{
 		Slice []bool
-	}{
-		{
-			Slice: []bool{},
-		},
+	}{}
 
+	for _, slice := range boolTestSlices {
+		sliceCopy := append([]bool(nil), slice...)
 
+		test := struct{
+			Slice []bool
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []bool{false},
-		},
-		{
-			Slice: []bool{true},
-		},
-
-
-
-		{
-			Slice: []bool{false,false},
-		},
-		{
-			Slice: []bool{false,true},
-		},
-		{
-			Slice: []bool{true,false},
-		},
-		{
-			Slice: []bool{true,true},
-		},
-
-
-
-		{
-			Slice: []bool{false,false,false},
-		},
-		{
-			Slice: []bool{false,false,true},
-		},
-		{
-			Slice: []bool{false,true,false},
-		},
-		{
-			Slice: []bool{false,true,true},
-		},
-		{
-			Slice: []bool{true,false,false},
-		},
-		{
-			Slice: []bool{true,false,true},
-		},
-		{
-			Slice: []bool{true,true,false},
-		},
-		{
-			Slice: []bool{true,true,true},
-		},
-
-
-
-		{
-			Slice: []bool{true,false,false,true,false,true,true,false,true,true,true},
-		},
+		tests = append(tests, test)
 	}
 
 

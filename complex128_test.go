@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	complex128TestSlices = [][]complex128{
+		[]complex128{},
+
+		[]complex128{0},
+		[]complex128{1},
+		[]complex128{2},
+		[]complex128{3},
+		[]complex128{4},
+		[]complex128{5},
+		[]complex128{6},
+		[]complex128{7},
+		[]complex128{8},
+		[]complex128{9},
+		[]complex128{10},
+
+		[]complex128{0,1,2,3,4,5,6,7,8,9,10},
+
+		[]complex128{213,18,4},
+	}
+)
+
 func TestComplex128(t *testing.T) {
 
 	tests := []struct{
 		Slice []complex128
-	}{
-		{
-			Slice: []complex128{},
-		},
+	}{}
 
+	for _, slice := range complex128TestSlices {
+		sliceCopy := append([]complex128(nil), slice...)
 
+		test := struct{
+			Slice []complex128
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []complex128{0},
-		},
-		{
-			Slice: []complex128{1},
-		},
-		{
-			Slice: []complex128{2},
-		},
-		{
-			Slice: []complex128{3},
-		},
-		{
-			Slice: []complex128{4},
-		},
-		{
-			Slice: []complex128{5},
-		},
-		{
-			Slice: []complex128{6},
-		},
-		{
-			Slice: []complex128{7},
-		},
-		{
-			Slice: []complex128{8},
-		},
-		{
-			Slice: []complex128{9},
-		},
-		{
-			Slice: []complex128{10},
-		},
-
-
-
-		{
-			Slice: []complex128{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []complex128{213,18,4},
-		},
+		tests = append(tests, test)
 	}
 
 

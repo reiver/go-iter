@@ -6,30 +6,36 @@ import (
 	"testing"
 )
 
+var (
+	timeTestSlices = [][]time.Time{
+		[]time.Time{},
+
+		[]time.Time{ time.Now() },
+
+		[]time.Time{
+			time.Now().Add( -1 * time.Hour ),
+			time.Now().Add( -2 * time.Hour ),
+			time.Now().Add( -3 * time.Hour ),
+		},
+	}
+)
+
 func TestTime(t *testing.T) {
 
 	tests := []struct{
 		Slice []time.Time
-	}{
-		{
-			Slice: []time.Time{},
-		},
+	}{}
 
+	for _, slice := range timeTestSlices {
+		sliceCopy := append([]time.Time(nil), slice...)
 
+		test := struct{
+			Slice []time.Time
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []time.Time{ time.Now() },
-		},
-
-
-
-		{
-			Slice: []time.Time{
-				time.Now().Add( -1 * time.Hour ),
-				time.Now().Add( -2 * time.Hour ),
-				time.Now().Add( -3 * time.Hour ),
-			},
-		},
+		tests = append(tests, test)
 	}
 
 

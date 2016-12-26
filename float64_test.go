@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	float64TestSlices = [][]float64{
+		[]float64{},
+
+		[]float64{0.0},
+		[]float64{1.0},
+		[]float64{2.0},
+		[]float64{3.0},
+		[]float64{4.0},
+		[]float64{5.0},
+		[]float64{6.0},
+		[]float64{7.0},
+		[]float64{8.0},
+		[]float64{9.0},
+		[]float64{10.0},
+
+		[]float64{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
+
+		[]float64{213.202,18.179,4.000002},
+	}
+)
+
 func TestFloat64(t *testing.T) {
 
 	tests := []struct{
 		Slice []float64
-	}{
-		{
-			Slice: []float64{},
-		},
+	}{}
 
+	for _, slice := range float64TestSlices {
+		sliceCopy := append([]float64(nil), slice...)
 
+		test := struct{
+			Slice []float64
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []float64{0.0},
-		},
-		{
-			Slice: []float64{1.0},
-		},
-		{
-			Slice: []float64{2.0},
-		},
-		{
-			Slice: []float64{3.0},
-		},
-		{
-			Slice: []float64{4.0},
-		},
-		{
-			Slice: []float64{5.0},
-		},
-		{
-			Slice: []float64{6.0},
-		},
-		{
-			Slice: []float64{7.0},
-		},
-		{
-			Slice: []float64{8.0},
-		},
-		{
-			Slice: []float64{9.0},
-		},
-		{
-			Slice: []float64{10.0},
-		},
-
-
-
-		{
-			Slice: []float64{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0},
-		},
-
-
-
-		{
-			Slice: []float64{213.202,18.179,4.000002},
-		},
+		tests = append(tests, test)
 	}
 
 

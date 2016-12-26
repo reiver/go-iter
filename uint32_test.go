@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	uint32TestSlices = [][]uint32{
+		[]uint32{},
+
+		[]uint32{0},
+		[]uint32{1},
+		[]uint32{2},
+		[]uint32{3},
+		[]uint32{4},
+		[]uint32{5},
+		[]uint32{6},
+		[]uint32{7},
+		[]uint32{8},
+		[]uint32{9},
+		[]uint32{10},
+
+		[]uint32{0,1,2,3,4,5,6,7,8,9,10},
+
+		[]uint32{213,18,4},
+	}
+)
+
 func TestUint32(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint32
-	}{
-		{
-			Slice: []uint32{},
-		},
+	}{}
 
+	for _, slice := range uint32TestSlices {
+		sliceCopy := append([]uint32(nil), slice...)
 
+		test := struct{
+			Slice []uint32
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []uint32{0},
-		},
-		{
-			Slice: []uint32{1},
-		},
-		{
-			Slice: []uint32{2},
-		},
-		{
-			Slice: []uint32{3},
-		},
-		{
-			Slice: []uint32{4},
-		},
-		{
-			Slice: []uint32{5},
-		},
-		{
-			Slice: []uint32{6},
-		},
-		{
-			Slice: []uint32{7},
-		},
-		{
-			Slice: []uint32{8},
-		},
-		{
-			Slice: []uint32{9},
-		},
-		{
-			Slice: []uint32{10},
-		},
-
-
-
-		{
-			Slice: []uint32{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []uint32{213,18,4},
-		},
+		tests = append(tests, test)
 	}
 
 

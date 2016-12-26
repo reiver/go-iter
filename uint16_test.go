@@ -4,62 +4,44 @@ import (
 	"testing"
 )
 
+var (
+	uint16TestSlices = [][]uint16{
+		[]uint16{},
+
+		[]uint16{0},
+		[]uint16{1},
+		[]uint16{2},
+		[]uint16{3},
+		[]uint16{4},
+		[]uint16{5},
+		[]uint16{6},
+		[]uint16{7},
+		[]uint16{8},
+		[]uint16{9},
+		[]uint16{10},
+
+		[]uint16{0,1,2,3,4,5,6,7,8,9,10},
+
+		[]uint16{213,18,4},
+	}
+)
+
 func TestUint16(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
-	}{
-		{
-			Slice: []uint16{},
-		},
+	}{}
 
+	for _, slice := range uint16TestSlices {
+		sliceCopy := append([]uint16(nil), slice...)
 
+		test := struct{
+			Slice []uint16
+		}{
+			Slice: sliceCopy,
+		}
 
-		{
-			Slice: []uint16{0},
-		},
-		{
-			Slice: []uint16{1},
-		},
-		{
-			Slice: []uint16{2},
-		},
-		{
-			Slice: []uint16{3},
-		},
-		{
-			Slice: []uint16{4},
-		},
-		{
-			Slice: []uint16{5},
-		},
-		{
-			Slice: []uint16{6},
-		},
-		{
-			Slice: []uint16{7},
-		},
-		{
-			Slice: []uint16{8},
-		},
-		{
-			Slice: []uint16{9},
-		},
-		{
-			Slice: []uint16{10},
-		},
-
-
-
-		{
-			Slice: []uint16{0,1,2,3,4,5,6,7,8,9,10},
-		},
-
-
-
-		{
-			Slice: []uint16{213,18,4},
-		},
+		tests = append(tests, test)
 	}
 
 

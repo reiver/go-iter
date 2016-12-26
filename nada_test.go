@@ -4,51 +4,56 @@ import (
 	"testing"
 )
 
+var (
+	nadaTestSlices = [][]struct{}{
+
+		[]struct{}{
+			// Nothing here.
+		},
+		[]struct{}{
+			struct{}{},
+		},
+		[]struct{}{
+			struct{}{},
+			struct{}{},
+		},
+		[]struct{}{
+			struct{}{},
+			struct{}{},
+			struct{}{},
+		},
+		[]struct{}{
+			struct{}{},
+			struct{}{},
+			struct{}{},
+			struct{}{},
+		},
+		[]struct{}{
+			struct{}{},
+			struct{}{},
+			struct{}{},
+			struct{}{},
+			struct{}{},
+		},
+	}
+)
+
 func TestNada(t *testing.T) {
 
 	tests := []struct{
 		Slice []struct{}
-	}{
-		{
-			Slice: []struct{}{
-				// Nothing here.
-			},
-		},
-		{
-			Slice: []struct{}{
-				struct{}{},
-			},
-		},
-		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-			},
-		},
-		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
-		},
-		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
-		},
-		{
-			Slice: []struct{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
-		},
+	}{}
+
+	for _, slice := range nadaTestSlices {
+		sliceCopy := append([]struct{}(nil), slice...)
+
+		test := struct{
+			Slice []struct{}
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
 	}
 
 
