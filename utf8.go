@@ -1,6 +1,7 @@
 package iter
 
 import (
+	"database/sql"
 	"fmt"
 	"sync"
 	"unicode/utf8"
@@ -52,6 +53,14 @@ func (receiver *UTF8) Decode(x interface{}) error {
 		}
 
 		*p = receiver.datum
+	case sql.Scanner:
+		var buffer [utf8.UTFMax]byte
+		ptr := buffer[:]
+
+		n := utf8.EncodeRune(ptr, receiver.datum)
+		ptr = ptr[:n]
+
+		return p.Scan(ptr)
 	default:
 		return &internalBadTypeComplainer{fmt.Sprintf("%T", p)}
 	}

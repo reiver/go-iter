@@ -1,6 +1,7 @@
 package iter
 
 import (
+	"database/sql"
 	"fmt"
 	"sync"
 )
@@ -51,6 +52,8 @@ func (receiver *Int64) Decode(x interface{}) error {
 		}
 
 		*p = receiver.datum
+	case sql.Scanner:
+		return p.Scan(receiver.datum)
 	default:
 		return &internalBadTypeComplainer{fmt.Sprintf("%T", p)}
 	}

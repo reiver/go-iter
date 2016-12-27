@@ -3,7 +3,7 @@
 Package **iter** provides tools for creating iterators, for the Go programming language.
 
 These iterators are intentionally made to resemble `*sql.Rows` from the `"database/sql"` package.
-Including having the same `Close`, `Err`, and `Next` methods.
+Including having the same `Close`, `Err`, `Next`, and `Scan` methods.
 
 (Note that to turn something into an actual `*sql.Rows` from the `"database/sql"` package,
 instead of _just_ resembling it, use https://github.com/reiver/go-shunt instead.)
