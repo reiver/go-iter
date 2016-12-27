@@ -36,5 +36,23 @@ For example, we can turn a slice into an iterator, with code like the following:
 	}
 
 This can help to enable us to write more (run-time oriented) generic code.
+
+To be able to distinguish one iterator type from another, in a generic way,
+that is not so specific to this package, we can use the Type method.
+
+For example:
+
+	switch reflect.Zero( iterator.Type() ).Interface().(type) {
+	case bool:
+		//@TODO
+	case float64:
+		//@TODO
+	case [2]float64:
+		//@TODO
+	case string:
+		//@TODO
+	default:
+		//@TODO
+	}
 */
 package iter
