@@ -1,4 +1,4 @@
-package iter
+package iteruint8
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestUint8(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint8
@@ -49,7 +49,7 @@ func TestUint8(t *testing.T) {
 
 		slice := append([]uint8(nil), test.Slice...)
 
-		iterator := Uint8{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -171,7 +171,7 @@ func TestUint8(t *testing.T) {
 	}
 }
 
-func TestUint8Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint8
@@ -195,7 +195,7 @@ func TestUint8Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]uint8(nil), test.Slice...)
 
-			iterator := Uint8{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -220,9 +220,9 @@ func TestUint8Close(t *testing.T) {
 	}
 }
 
-func TestUint8ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Uint8)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()
