@@ -1,9 +1,9 @@
-package iter
+package iterbyte
 
 import (
 	"reflect"
 )
 
-func (receiver *Byte) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*byte)(nil)).Elem()
 }

@@ -1,4 +1,4 @@
-package iter
+package iterbyte
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestByteScanIntoByte(t *testing.T) {
+func TestSliceScanIntoByte(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
@@ -29,7 +29,7 @@ func TestByteScanIntoByte(t *testing.T) {
 
 		slice := append([]byte(nil), test.Slice...)
 
-		iterator := Byte{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestByteScanIntoByte(t *testing.T) {
 	}
 }
 
-func TestByteScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
@@ -80,7 +80,7 @@ func TestByteScanIntoInterface(t *testing.T) {
 
 		slice := append([]byte(nil), test.Slice...)
 
-		iterator := Byte{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -114,7 +114,7 @@ func TestByteScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestByteScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
@@ -137,7 +137,7 @@ func TestByteScanIntoScanner(t *testing.T) {
 
 		slice := append([]byte(nil), test.Slice...)
 
-		iterator := Byte{
+		iterator := Slice{
 			Slice: slice,
 		}
 

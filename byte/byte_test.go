@@ -1,4 +1,4 @@
-package iter
+package iterbyte
 
 import (
 	"bytes"
@@ -28,7 +28,7 @@ var (
 	}
 )
 
-func TestByte(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
@@ -51,7 +51,7 @@ func TestByte(t *testing.T) {
 
 		slice := append([]byte(nil), test.Slice...)
 
-		iterator := Byte{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -133,7 +133,7 @@ func TestByte(t *testing.T) {
 	}
 }
 
-func TestByteClose(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
@@ -157,7 +157,7 @@ func TestByteClose(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]byte(nil), test.Slice...)
 
-			iterator := Byte{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -182,9 +182,9 @@ func TestByteClose(t *testing.T) {
 }
 
 
-func TestByteErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Byte)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

@@ -1,4 +1,4 @@
-package iter
+package iterbyte
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestByteWriteTo(t *testing.T) {
+func TestSliceWriteTo(t *testing.T) {
 
 	tests := []struct{
 		Slice []byte
@@ -73,7 +73,7 @@ func TestByteWriteTo(t *testing.T) {
 
 		slice := append([]byte(nil), test.Slice...)
 
-		iterator := Byte{
+		iterator := Slice{
 			Slice: slice,
 		}
 
