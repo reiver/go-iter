@@ -1,4 +1,4 @@
-package iter
+package iteruint64
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestUint64(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint64
@@ -49,7 +49,7 @@ func TestUint64(t *testing.T) {
 
 		slice := append([]uint64(nil), test.Slice...)
 
-		iterator := Uint64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -131,7 +131,7 @@ func TestUint64(t *testing.T) {
 	}
 }
 
-func TestUint64Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint64
@@ -155,7 +155,7 @@ func TestUint64Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]uint64(nil), test.Slice...)
 
-			iterator := Uint64{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -180,9 +180,9 @@ func TestUint64Close(t *testing.T) {
 	}
 }
 
-func TestUint64ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Uint64)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

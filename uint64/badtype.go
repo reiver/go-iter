@@ -1,4 +1,4 @@
-package iter
+package iteruint64
 
 import (
 	"fmt"

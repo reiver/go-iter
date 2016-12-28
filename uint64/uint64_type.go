@@ -1,9 +1,9 @@
-package iter
+package iteruint64
 
 import (
 	"reflect"
 )
 
-func (receiver *Uint64) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*uint64)(nil)).Elem()
 }
