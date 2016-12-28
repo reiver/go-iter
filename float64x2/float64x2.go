@@ -1,4 +1,4 @@
-package iter
+package iterfloat64x2
 
 import (
 	"database/sql"

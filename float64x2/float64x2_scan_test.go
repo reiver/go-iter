@@ -1,6 +1,8 @@
-package iter
+package iterfloat64x2
 
 import (
+	"fmt"
+
 	"testing"
 )
 
@@ -185,4 +187,34 @@ func TestFloat64x2ScanIntoScanner(t *testing.T) {
 			}
 		}
 	}
+}
+
+type float64TestScanner struct {
+	value float64
+	scanned bool
+}
+
+func (receiver float64TestScanner) Scanned() bool {
+	return receiver.scanned
+}
+
+func (receiver float64TestScanner) Value() float64 {
+	return receiver.value
+}
+
+func (receiver *float64TestScanner) Scan(src interface{}) error {
+	if nil == src {
+		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
+	}
+
+	b, ok := src.(float64)
+	if !ok {
+		return fmt.Errorf("Could not convert %T into float64.", src)
+	}
+
+	receiver.value   = b
+	receiver.scanned = true
+
+
+	return nil
 }
