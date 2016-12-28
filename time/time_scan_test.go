@@ -1,4 +1,4 @@
-package iter
+package itertime
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ func TestTimeScanIntoTime(t *testing.T) {
 
 		slice := append([]time.Time(nil), test.Slice...)
 
-		iterator := Time{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -81,7 +81,7 @@ func TestTimeScanIntoInterface(t *testing.T) {
 
 		slice := append([]time.Time(nil), test.Slice...)
 
-		iterator := Time{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -138,7 +138,7 @@ func TestTimeScanIntoScanner(t *testing.T) {
 
 		slice := append([]time.Time(nil), test.Slice...)
 
-		iterator := Time{
+		iterator := Slice{
 			Slice: slice,
 		}
 

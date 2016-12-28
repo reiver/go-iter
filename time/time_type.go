@@ -1,10 +1,10 @@
-package iter
+package itertime
 
 import (
 	"reflect"
 	"time"
 )
 
-func (receiver *Time) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*time.Time)(nil)).Elem()
 }

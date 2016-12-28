@@ -1,4 +1,4 @@
-package iter
+package itertime
 
 import (
 	"time"
@@ -20,7 +20,7 @@ var (
 	}
 )
 
-func TestTime(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []time.Time
@@ -43,7 +43,7 @@ func TestTime(t *testing.T) {
 
 		slice := append([]time.Time(nil), test.Slice...)
 
-		iterator := Time{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -125,7 +125,7 @@ func TestTime(t *testing.T) {
 	}
 }
 
-func TestTimeClose(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []time.Time
@@ -149,7 +149,7 @@ func TestTimeClose(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]time.Time(nil), test.Slice...)
 
-			iterator := Time{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -174,9 +174,9 @@ func TestTimeClose(t *testing.T) {
 	}
 }
 
-func TestTimeErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Time)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()
