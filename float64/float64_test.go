@@ -1,4 +1,4 @@
-package iter
+package iterfloat64
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestFloat64(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []float64
@@ -49,7 +49,7 @@ func TestFloat64(t *testing.T) {
 
 		slice := append([]float64(nil), test.Slice...)
 
-		iterator := Float64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -131,7 +131,7 @@ func TestFloat64(t *testing.T) {
 	}
 }
 
-func TestFloat64Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []float64
@@ -155,7 +155,7 @@ func TestFloat64Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]float64(nil), test.Slice...)
 
-			iterator := Float64{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -180,9 +180,9 @@ func TestFloat64Close(t *testing.T) {
 	}
 }
 
-func TestFloat64ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Float64)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

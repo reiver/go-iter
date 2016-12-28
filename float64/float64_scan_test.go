@@ -1,4 +1,4 @@
-package iter
+package iterfloat64
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestFloat64ScanIntoFloat64(t *testing.T) {
+func TestSliceScanIntoFloat64(t *testing.T) {
 
 	tests := []struct{
 		Slice []float64
@@ -29,7 +29,7 @@ func TestFloat64ScanIntoFloat64(t *testing.T) {
 
 		slice := append([]float64(nil), test.Slice...)
 
-		iterator := Float64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestFloat64ScanIntoFloat64(t *testing.T) {
 	}
 }
 
-func TestFloat64ScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []float64
@@ -80,7 +80,7 @@ func TestFloat64ScanIntoInterface(t *testing.T) {
 
 		slice := append([]float64(nil), test.Slice...)
 
-		iterator := Float64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -114,7 +114,7 @@ func TestFloat64ScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestFloat64ScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []float64
@@ -137,7 +137,7 @@ func TestFloat64ScanIntoScanner(t *testing.T) {
 
 		slice := append([]float64(nil), test.Slice...)
 
-		iterator := Float64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
