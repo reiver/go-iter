@@ -1,10 +1,10 @@
-package iterfloat64
+package iterkernel
 
 import (
 	"fmt"
 )
 
-func (receiver *common) _scan(fn func(interface{})bool, dest ...interface{}) error {
+func (receiver *Kernel) KernelScan(fn func(interface{})(bool,error), dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -17,7 +17,7 @@ func (receiver *common) _scan(fn func(interface{})bool, dest ...interface{}) err
 
 	dest0 := dest[0]
 
-	if err := receiver._decode(fn, dest0); nil != err {
+	if err := receiver.KernelDecode(fn, dest0); nil != err {
 		return err
 	}
 

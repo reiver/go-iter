@@ -1,4 +1,4 @@
-package iterfloat64
+package iterkernel
 
 import (
 	"database/sql"
@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-type common struct {
+type Kernel struct {
 	err error
 	index int
 	mutex sync.RWMutex
@@ -14,7 +14,7 @@ type common struct {
 	datum interface{}
 }
 
-func (receiver *common) _close() error {
+func (receiver *Kernel) KernelClose() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -27,7 +27,7 @@ func (receiver *common) _close() error {
 	return nil
 }
 
-func (receiver *common) _decode(fn func(interface{})bool, x interface{}) error {
+func (receiver *Kernel) KernelDecode(fn func(interface{})(bool,error), x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -35,8 +35,14 @@ func (receiver *common) _decode(fn func(interface{})bool, x interface{}) error {
 	receiver.mutex.RLock()
 	defer receiver.mutex.RUnlock()
 
-	if fn(x) {
-		return nil
+	{
+		decoded, err := fn(x)
+		if nil != err {
+			return err
+		}
+		if decoded {
+			return nil
+		}
 	}
 
 	switch p := x.(type) {
@@ -55,7 +61,7 @@ func (receiver *common) _decode(fn func(interface{})bool, x interface{}) error {
 	return nil
 }
 
-func (receiver *common) _err() error {
+func (receiver *Kernel) KernelErr() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -66,7 +72,7 @@ func (receiver *common) _err() error {
 	return receiver.err
 }
 
-func (receiver *common) _next(fn func(int,interface{})(bool, error)) bool {
+func (receiver *Kernel) KernelNext(fn func(int,interface{})(bool, error)) bool {
 	if nil == receiver {
 		return false
 	}
