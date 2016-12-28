@@ -25,7 +25,30 @@ func (receiver *Slice) Decode(x interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.common._decode(x)
+	return receiver.common._decode(receiver.decode, x)
+}
+
+func (receiver *Slice) decode(x interface{}) bool {
+	if nil == receiver {
+		return false
+	}
+
+	if nil == x {
+		return false
+	}
+
+	switch p := x.(type) {
+	case *float64:
+                if nil == p {
+                        return true
+                }
+
+                *p = receiver.datum.(float64)
+
+		return true
+	default:
+                return false
+	}
 }
 
 // Err returns the error, if an error was encountered during an iteration.

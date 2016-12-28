@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func (receiver *common) _scan(dest ...interface{}) error {
+func (receiver *common) _scan(fn func(interface{})bool, dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -17,7 +17,7 @@ func (receiver *common) _scan(dest ...interface{}) error {
 
 	dest0 := dest[0]
 
-	if err := receiver._decode(dest0); nil != err {
+	if err := receiver._decode(fn, dest0); nil != err {
 		return err
 	}
 

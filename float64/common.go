@@ -27,7 +27,7 @@ func (receiver *common) _close() error {
 	return nil
 }
 
-func (receiver *common) _decode(x interface{}) error {
+func (receiver *common) _decode(fn func(interface{})bool, x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -35,13 +35,11 @@ func (receiver *common) _decode(x interface{}) error {
 	receiver.mutex.RLock()
 	defer receiver.mutex.RUnlock()
 
-	switch p := x.(type) {
-	case *float64:
-		if nil == p {
-			return nil
-		}
+	if fn(x) {
+		return nil
+	}
 
-		*p = receiver.datum.(float64)
+	switch p := x.(type) {
 	case *interface{}:
 		if nil == p {
 			return nil

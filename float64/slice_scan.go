@@ -6,5 +6,5 @@ func (receiver *Slice) Scan(dest ...interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.common._scan(dest...)
+	return receiver.common._scan(receiver.decode, dest...)
 }
