@@ -1,5 +1,5 @@
 /*
-Package iterfloat64x2 provides tools for creating iterators for the [2]float64 type.
+Package iterstring provides tools for creating iterators for the string type.
 
 These iterators are intentionally made to resemble *sql.Rows from the "database/sql" package.
 Including having the same Close, Err, Next, and Scan methods.
@@ -9,21 +9,15 @@ use https://github.com/reiver/go-shunt instead.)
 
 For example, we can turn a slice into an iterator, with code like the following:
 
-	var slice [][2]float64 = [][2]float64 {
-		[2]float64{5.0, -25.0},
-		[2]float64{4.0,-16.0},
-		[2]float64{3.0, -9.0},
-		[2]float64{2.0, -4.0},
-		[2]float64{1.0, -1.0},
-		[2]float64{0.0,  0.0},
-		[2]float64{1.0,  0.1},
-		[2]float64{2.0,  0.4},
-		[2]float64{3.0,  0.9},
-		[2]float64{4.0,  0.16},
-		[2]float64{5.0,  0.25},
+	var slice []string = []string {
+		false,
+		true,
+		true,
+		false,
+		true,
 	}
 	
-	iterator := iterfloat64x2.Slice{
+	iterator := iterstring.Slice{
 		Slice: slice,
 	}
 	
@@ -31,7 +25,7 @@ For example, we can turn a slice into an iterator, with code like the following:
 	
 	for iterator.Next() {
 	
-		var datum [2]float64 // Could have also used: var datum interface{}
+		var datum string // Could have also used: var datum interface{}
 	
 		if err := iterator.Decode(&datum); nil != err {
 			return err
@@ -97,4 +91,4 @@ For example:
 		//@TODO
 	}
 */
-package iterfloat64x2
+package iterstring
