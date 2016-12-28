@@ -9,7 +9,7 @@ use https://github.com/reiver/go-shunt instead.)
 
 For example, we can turn a slice into an iterator, with code like the following:
 
-	var slice []string = []string {
+	var slice []bool = []bool {
 		false,
 		true,
 		true,
