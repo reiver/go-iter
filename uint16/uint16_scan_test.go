@@ -1,4 +1,4 @@
-package iter
+package iteruint16
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestUint16ScanIntoInt32(t *testing.T) {
+func TestSliceScanIntoInt32(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -29,7 +29,7 @@ func TestUint16ScanIntoInt32(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestUint16ScanIntoInt32(t *testing.T) {
 	}
 }
 
-func TestUint16ScanIntoInt64(t *testing.T) {
+func TestSliceScanIntoInt64(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -80,7 +80,7 @@ func TestUint16ScanIntoInt64(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -108,7 +108,7 @@ func TestUint16ScanIntoInt64(t *testing.T) {
 	}
 }
 
-func TestUint16ScanIntoUint16(t *testing.T) {
+func TestSliceScanIntoUint16(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -131,7 +131,7 @@ func TestUint16ScanIntoUint16(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -159,7 +159,7 @@ func TestUint16ScanIntoUint16(t *testing.T) {
 	}
 }
 
-func TestUint16ScanIntoUint32(t *testing.T) {
+func TestSliceScanIntoUint32(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -182,7 +182,7 @@ func TestUint16ScanIntoUint32(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -210,7 +210,7 @@ func TestUint16ScanIntoUint32(t *testing.T) {
 	}
 }
 
-func TestUint16ScanIntoUint64(t *testing.T) {
+func TestSliceScanIntoUint64(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -233,7 +233,7 @@ func TestUint16ScanIntoUint64(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -261,7 +261,7 @@ func TestUint16ScanIntoUint64(t *testing.T) {
 	}
 }
 
-func TestUint16ScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -284,7 +284,7 @@ func TestUint16ScanIntoInterface(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -318,7 +318,7 @@ func TestUint16ScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestUint16ScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -341,7 +341,7 @@ func TestUint16ScanIntoScanner(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 

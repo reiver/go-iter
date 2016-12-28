@@ -1,4 +1,4 @@
-package iter
+package iteruint16
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestUint16(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -49,7 +49,7 @@ func TestUint16(t *testing.T) {
 
 		slice := append([]uint16(nil), test.Slice...)
 
-		iterator := Uint16{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -159,7 +159,7 @@ func TestUint16(t *testing.T) {
 	}
 }
 
-func TestUint16Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []uint16
@@ -183,7 +183,7 @@ func TestUint16Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]uint16(nil), test.Slice...)
 
-			iterator := Uint16{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -208,9 +208,9 @@ func TestUint16Close(t *testing.T) {
 	}
 }
 
-func TestUint16ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Uint16)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()
