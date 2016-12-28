@@ -1,4 +1,4 @@
 /*
-Package iterkernel is a low-level helpr for implementing iterators.
+Package iterkernel is a low-level helper for implementing iterators.
 */
 package iterkernel
