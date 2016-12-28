@@ -91,4 +91,4 @@ For example:
 		//@TODO
 	}
 */
-package iterstring
+package iterfloat64x2
