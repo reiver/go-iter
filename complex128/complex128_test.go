@@ -1,4 +1,4 @@
-package iter
+package itercomplex128
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestComplex128(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []complex128
@@ -49,7 +49,7 @@ func TestComplex128(t *testing.T) {
 
 		slice := append([]complex128(nil), test.Slice...)
 
-		iterator := Complex128{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -131,7 +131,7 @@ func TestComplex128(t *testing.T) {
 	}
 }
 
-func TestComplex128Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []complex128
@@ -155,7 +155,7 @@ func TestComplex128Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]complex128(nil), test.Slice...)
 
-			iterator := Complex128{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -180,9 +180,9 @@ func TestComplex128Close(t *testing.T) {
 	}
 }
 
-func TestComplex128ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Complex128)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()
