@@ -1,4 +1,4 @@
-package iter
+package iterbool
 
 import (
 	"testing"
@@ -29,7 +29,7 @@ var (
 	}
 )
 
-func TestBool(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []bool
@@ -52,7 +52,7 @@ func TestBool(t *testing.T) {
 
 		slice := append([]bool(nil), test.Slice...)
 
-		iterator := Bool{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -134,7 +134,7 @@ func TestBool(t *testing.T) {
 	}
 }
 
-func TestBoolClose(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []bool
@@ -158,7 +158,7 @@ func TestBoolClose(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]bool(nil), test.Slice...)
 
-			iterator := Bool{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -183,9 +183,9 @@ func TestBoolClose(t *testing.T) {
 	}
 }
 
-func TestBoolErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Bool)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

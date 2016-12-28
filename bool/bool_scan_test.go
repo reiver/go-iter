@@ -1,4 +1,4 @@
-package iter
+package iterbool
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestBoolScanIntoBool(t *testing.T) {
+func TestSliceScanIntoBool(t *testing.T) {
 
 	tests := []struct{
 		Slice []bool
@@ -29,7 +29,7 @@ func TestBoolScanIntoBool(t *testing.T) {
 
 		slice := append([]bool(nil), test.Slice...)
 
-		iterator := Bool{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestBoolScanIntoBool(t *testing.T) {
 	}
 }
 
-func TestBoolScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []bool
@@ -80,7 +80,7 @@ func TestBoolScanIntoInterface(t *testing.T) {
 
 		slice := append([]bool(nil), test.Slice...)
 
-		iterator := Bool{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -114,7 +114,7 @@ func TestBoolScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestBoolScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []bool
@@ -137,7 +137,7 @@ func TestBoolScanIntoScanner(t *testing.T) {
 
 		slice := append([]bool(nil), test.Slice...)
 
-		iterator := Bool{
+		iterator := Slice{
 			Slice: slice,
 		}
 

@@ -1,10 +1,10 @@
-package iter
+package iterbool
 
 import (
 	"fmt"
 )
 
-func (receiver *Bool) Scan(dest ...interface{}) error {
+func (receiver *Slice) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}

@@ -1,9 +1,9 @@
-package iter
+package iterbool
 
 import (
 	"reflect"
 )
 
-func (receiver *Bool) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*bool)(nil)).Elem()
 }
