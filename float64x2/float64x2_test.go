@@ -42,7 +42,7 @@ var (
 	}
 )
 
-func TestFloat64x2(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice [][2]float64
@@ -65,7 +65,7 @@ func TestFloat64x2(t *testing.T) {
 
 		slice := append([][2]float64(nil), test.Slice...)
 
-		iterator := Float64x2{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -147,7 +147,7 @@ func TestFloat64x2(t *testing.T) {
 	}
 }
 
-func TestFloat64x2Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice [][2]float64
@@ -171,7 +171,7 @@ func TestFloat64x2Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([][2]float64(nil), test.Slice...)
 
-			iterator := Float64x2{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -196,9 +196,9 @@ func TestFloat64x2Close(t *testing.T) {
 	}
 }
 
-func TestFloat64x2ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Float64x2)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func (receiver *Float64x2) Scan(dest ...interface{}) error {
+func (receiver *Slice) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
