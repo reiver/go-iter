@@ -6,6 +6,108 @@ import (
 	"testing"
 )
 
+func TestUint16ScanIntoInt32(t *testing.T) {
+
+	tests := []struct{
+		Slice []uint16
+	}{}
+
+	for _, slice := range uint16TestSlices {
+		sliceCopy := append([]uint16(nil), slice...)
+
+		test := struct{
+			Slice []uint16
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
+
+
+	for testNumber, test := range tests {
+
+		slice := append([]uint16(nil), test.Slice...)
+
+		iterator := Uint16{
+			Slice: slice,
+		}
+
+		if err := iterator.Err(); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		iterationNumber := -1
+		for iterator.Next() {
+			iterationNumber++
+
+			var datum int32
+
+			if err := iterator.Scan(&datum); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+				continue
+			}
+
+			if expected, actual := int32(test.Slice[iterationNumber]), datum; expected != actual {
+				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestUint16ScanIntoInt64(t *testing.T) {
+
+	tests := []struct{
+		Slice []uint16
+	}{}
+
+	for _, slice := range uint16TestSlices {
+		sliceCopy := append([]uint16(nil), slice...)
+
+		test := struct{
+			Slice []uint16
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
+
+
+	for testNumber, test := range tests {
+
+		slice := append([]uint16(nil), test.Slice...)
+
+		iterator := Uint16{
+			Slice: slice,
+		}
+
+		if err := iterator.Err(); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		iterationNumber := -1
+		for iterator.Next() {
+			iterationNumber++
+
+			var datum int64
+
+			if err := iterator.Scan(&datum); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+				continue
+			}
+
+			if expected, actual := int64(test.Slice[iterationNumber]), datum; expected != actual {
+				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
 func TestUint16ScanIntoUint16(t *testing.T) {
 
 	tests := []struct{
@@ -50,6 +152,108 @@ func TestUint16ScanIntoUint16(t *testing.T) {
 			}
 
 			if expected, actual := test.Slice[iterationNumber], datum; expected != actual {
+				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestUint16ScanIntoUint32(t *testing.T) {
+
+	tests := []struct{
+		Slice []uint16
+	}{}
+
+	for _, slice := range uint16TestSlices {
+		sliceCopy := append([]uint16(nil), slice...)
+
+		test := struct{
+			Slice []uint16
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
+
+
+	for testNumber, test := range tests {
+
+		slice := append([]uint16(nil), test.Slice...)
+
+		iterator := Uint16{
+			Slice: slice,
+		}
+
+		if err := iterator.Err(); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		iterationNumber := -1
+		for iterator.Next() {
+			iterationNumber++
+
+			var datum uint32
+
+			if err := iterator.Scan(&datum); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+				continue
+			}
+
+			if expected, actual := uint32(test.Slice[iterationNumber]), datum; expected != actual {
+				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestUint16ScanIntoUint64(t *testing.T) {
+
+	tests := []struct{
+		Slice []uint16
+	}{}
+
+	for _, slice := range uint16TestSlices {
+		sliceCopy := append([]uint16(nil), slice...)
+
+		test := struct{
+			Slice []uint16
+		}{
+			Slice: sliceCopy,
+		}
+
+		tests = append(tests, test)
+	}
+
+
+	for testNumber, test := range tests {
+
+		slice := append([]uint16(nil), test.Slice...)
+
+		iterator := Uint16{
+			Slice: slice,
+		}
+
+		if err := iterator.Err(); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		iterationNumber := -1
+		for iterator.Next() {
+			iterationNumber++
+
+			var datum uint64
+
+			if err := iterator.Scan(&datum); nil != err {
+				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
+				continue
+			}
+
+			if expected, actual := uint64(test.Slice[iterationNumber]), datum; expected != actual {
 				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
 				continue
 			}

@@ -52,6 +52,12 @@ func (receiver *Uint32) Decode(x interface{}) error {
 		}
 
 		*p = uint64(receiver.datum)
+	case *int64:
+		if nil == p {
+			return nil
+		}
+
+		*p = int64(receiver.datum)
 	case *interface{}:
 		if nil == p {
 			return nil
