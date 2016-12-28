@@ -1,10 +1,10 @@
-package iter
+package iteruint32
 
 import (
 	"fmt"
 )
 
-func (receiver *Uint32) Scan(dest ...interface{}) error {
+func (receiver *Slice) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}

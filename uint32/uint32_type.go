@@ -1,9 +1,9 @@
-package iter
+package iteruint32
 
 import (
 	"reflect"
 )
 
-func (receiver *Uint32) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*uint32)(nil)).Elem()
 }
