@@ -5,5 +5,5 @@ import (
 )
 
 func (receiver *Slice) Type() reflect.Type {
-	return receiver.common._type()
+	return receiver.nucleus._type()
 }

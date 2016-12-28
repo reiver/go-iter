@@ -7,5 +7,6 @@ import (
 
 
 var (
-	errNilReceiver = errors.New("Nil Receiver")
+	errInternalError = errors.New("Internal Error")
+	errNilReceiver   = errors.New("Nil Receiver")
 )

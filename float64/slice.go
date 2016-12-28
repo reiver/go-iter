@@ -6,7 +6,7 @@ import (
 
 type Slice struct {
 	Slice []float64
-	common
+	nucleus
 }
 
 func (receiver *Slice) Close() error {
@@ -14,7 +14,7 @@ func (receiver *Slice) Close() error {
 		return errNilReceiver
 	}
 
-	return receiver.common._close()
+	return receiver.nucleus._close()
 }
 
 // Decode stores the next datum in the data represented by the empty interface value `x`.
@@ -25,29 +25,34 @@ func (receiver *Slice) Decode(x interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.common._decode(receiver.decode, x)
+	return receiver.nucleus._decode(receiver.decode, x)
 }
 
-func (receiver *Slice) decode(x interface{}) bool {
+func (receiver *Slice) decode(x interface{}) (bool, error) {
 	if nil == receiver {
-		return false
+		return false, errNilReceiver
 	}
 
 	if nil == x {
-		return false
+		return false, nil
+	}
+
+	f64, err := receiver.nucleus._datum()
+	if nil != err {
+		return false, err
 	}
 
 	switch p := x.(type) {
 	case *float64:
                 if nil == p {
-                        return true
+                        return true, nil
                 }
 
-                *p = receiver.datum.(float64)
+                *p = f64
 
-		return true
+		return true, nil
 	default:
-                return false
+                return false, nil
 	}
 }
 
@@ -58,7 +63,7 @@ func (receiver *Slice) Err() error {
 		return errNilReceiver
 	}
 
-	return receiver.common._err()
+	return receiver.nucleus._err()
 }
 
 // Next prepares the next datum for reading via the Decode method.
@@ -80,7 +85,7 @@ func (receiver *Slice) Next() bool {
 		return false
 	}
 
-	return receiver.common._next(receiver.next)
+	return receiver.nucleus._next(receiver.next)
 }
 
 func (receiver *Slice) next(index int, v interface{}) (bool, error) {
