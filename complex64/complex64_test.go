@@ -1,4 +1,4 @@
-package iter
+package itercomplex64
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestComplex64(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []complex64
@@ -49,7 +49,7 @@ func TestComplex64(t *testing.T) {
 
 		slice := append([]complex64(nil), test.Slice...)
 
-		iterator := Complex64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -131,7 +131,7 @@ func TestComplex64(t *testing.T) {
 	}
 }
 
-func TestComplex64Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []complex64
@@ -155,7 +155,7 @@ func TestComplex64Close(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]complex64(nil), test.Slice...)
 
-			iterator := Complex64{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -180,9 +180,9 @@ func TestComplex64Close(t *testing.T) {
 	}
 }
 
-func TestComplex64ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Complex64)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

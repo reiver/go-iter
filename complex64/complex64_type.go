@@ -1,9 +1,9 @@
-package iter
+package itercomplex64
 
 import (
 	"reflect"
 )
 
-func (receiver *Complex64) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*complex64)(nil)).Elem()
 }
