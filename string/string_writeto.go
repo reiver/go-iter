@@ -1,10 +1,10 @@
-package iter
+package iterstring
 
 import (
 	"io"
 )
 
-func (receiver *String) WriteTo(w io.Writer) (int64, error) {
+func (receiver *Slice) WriteTo(w io.Writer) (int64, error) {
 	if nil == receiver {
 		return 0, errNilReceiver
 	}

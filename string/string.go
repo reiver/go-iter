@@ -1,4 +1,4 @@
-package iter
+package iterstring
 
 import (
 	"database/sql"
@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-type String struct {
+type Slice struct {
 	Slice []string
 	err error
 	index int
@@ -15,7 +15,7 @@ type String struct {
 	datum string
 }
 
-func (receiver *String) Close() error {
+func (receiver *Slice) Close() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -31,7 +31,7 @@ func (receiver *String) Close() error {
 // Decode stores the next datum in the data represented by the empty interface value `x`.
 // If `x` is nil, the value will be discarded.
 // Otherwise, the value underlying `x` must be a pointer to the correct type for the next datum.
-func (receiver *String) Decode(x interface{}) error {
+func (receiver *Slice) Decode(x interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -63,7 +63,7 @@ func (receiver *String) Decode(x interface{}) error {
 
 // Err returns the error, if an error was encountered during an iteration.
 // If no error was encountered during an iteration, then Err returns nil.
-func (receiver *String) Err() error {
+func (receiver *Slice) Err() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -88,7 +88,7 @@ func (receiver *String) Err() error {
 //
 // Err should be called to distinguish between the two cases where the Next
 // method can return false: 'no next datum' and 'an error was encountered'.
-func (receiver *String) Next() bool {
+func (receiver *Slice) Next() bool {
 	if nil == receiver {
 		return false
 	}

@@ -1,4 +1,4 @@
-package iter
+package iterstring
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestStringScanIntoString(t *testing.T) {
+func TestSliceScanIntoString(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -29,7 +29,7 @@ func TestStringScanIntoString(t *testing.T) {
 
 		slice := append([]string(nil), test.Slice...)
 
-		iterator := String{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestStringScanIntoString(t *testing.T) {
 	}
 }
 
-func TestStringScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -80,7 +80,7 @@ func TestStringScanIntoInterface(t *testing.T) {
 
 		slice := append([]string(nil), test.Slice...)
 
-		iterator := String{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -114,7 +114,7 @@ func TestStringScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestStringScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -137,7 +137,7 @@ func TestStringScanIntoScanner(t *testing.T) {
 
 		slice := append([]string(nil), test.Slice...)
 
-		iterator := String{
+		iterator := Slice{
 			Slice: slice,
 		}
 

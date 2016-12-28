@@ -1,4 +1,4 @@
-package iter
+package iterstring
 
 import (
 	"bytes"
@@ -26,7 +26,7 @@ var (
 	}
 )
 
-func TestString(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -49,7 +49,7 @@ func TestString(t *testing.T) {
 
 		slice := append([]string(nil), test.Slice...)
 
-		iterator := String{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -131,7 +131,7 @@ func TestString(t *testing.T) {
 	}
 }
 
-func TestStringClose(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -155,7 +155,7 @@ func TestStringClose(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]string(nil), test.Slice...)
 
-			iterator := String{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -180,9 +180,9 @@ func TestStringClose(t *testing.T) {
 	}
 }
 
-func TestStringErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*String)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

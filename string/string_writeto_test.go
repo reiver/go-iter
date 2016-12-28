@@ -1,4 +1,4 @@
-package iter
+package iterstring
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestStringWriteTo(t *testing.T) {
+func TestSliceWriteTo(t *testing.T) {
 
 	tests := []struct{
 		Slice []string
@@ -91,7 +91,7 @@ func TestStringWriteTo(t *testing.T) {
 
 		slice := append([]string(nil), test.Slice...)
 
-		iterator := String{
+		iterator := Slice{
 			Slice: slice,
 		}
 
