@@ -1,4 +1,4 @@
-package iter
+package iterutf8
 
 import (
 	"bytes"
@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestUTF8WriteTo(t *testing.T) {
+func TestSliceWriteTo(t *testing.T) {
 
 	tests := []struct{
 		Slice []rune
@@ -39,7 +39,7 @@ func TestUTF8WriteTo(t *testing.T) {
 			slice = append([]byte(nil), temp.Bytes()...)
 		}
 
-		iterator := UTF8{
+		iterator := Slice{
 			Slice: slice,
 		}
 

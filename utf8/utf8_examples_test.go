@@ -1,18 +1,18 @@
-package iter_test
+package iterutf8_test
 
 
 import (
 	"fmt"
 
-	"github.com/reiver/go-iter"
+	"github.com/reiver/go-iter/utf8"
 )
 
 
-func ExampleUTF8() {
+func ExampleSlice() {
 
 	var p []byte = []byte("Hello world! 🙂")
 
-	iterator := iter.UTF8{Slice:p}
+	iterator := iterutf8.Slice{Slice:p}
 
 	for iterator.Next() {
 		var r rune

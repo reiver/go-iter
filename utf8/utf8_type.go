@@ -1,9 +1,9 @@
-package iter
+package iterutf8
 
 import (
 	"reflect"
 )
 
-func (receiver *UTF8) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*rune)(nil)).Elem()
 }

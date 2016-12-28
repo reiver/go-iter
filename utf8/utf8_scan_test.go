@@ -1,4 +1,4 @@
-package iter
+package iterutf8
 
 import (
 	"bytes"
@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestUTF8ScanIntoRune(t *testing.T) {
+func TestSliceScanIntoRune(t *testing.T) {
 
 	tests := []struct{
 		Slice []rune
@@ -39,7 +39,7 @@ func TestUTF8ScanIntoRune(t *testing.T) {
 			slice = append([]byte(nil), temp.Bytes()...)
 		}
 
-		iterator := UTF8{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -67,7 +67,7 @@ func TestUTF8ScanIntoRune(t *testing.T) {
 	}
 }
 
-func TestUTF8ScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []rune
@@ -99,7 +99,7 @@ func TestUTF8ScanIntoInterface(t *testing.T) {
 			slice = append([]byte(nil), temp.Bytes()...)
 		}
 
-		iterator := UTF8{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -133,7 +133,7 @@ func TestUTF8ScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestUTF8ScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []rune
@@ -165,7 +165,7 @@ func TestUTF8ScanIntoScanner(t *testing.T) {
 			slice = append([]byte(nil), temp.Bytes()...)
 		}
 
-		iterator := UTF8{
+		iterator := Slice{
 			Slice: slice,
 		}
 

@@ -1,4 +1,4 @@
-package iter
+package iterutf8
 
 import (
 	"bytes"
@@ -41,7 +41,7 @@ var (
 	}
 )
 
-func TestUTF8(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []rune
@@ -73,7 +73,7 @@ func TestUTF8(t *testing.T) {
 			slice = append([]byte(nil), temp.Bytes()...)
 		}
 
-		iterator := UTF8{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -155,17 +155,17 @@ func TestUTF8(t *testing.T) {
 	}
 }
 
-func TestUTF8Close(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
-		Slice []byte
+		Slice []rune
 	}{}
 
-	for _, slice := range byteTestSlices {
-		sliceCopy := append([]byte(nil), slice...)
+	for _, slice := range utf8TestSlices {
+		sliceCopy := append([]rune(nil), slice...)
 
 		test := struct{
-			Slice []byte
+			Slice []rune
 		}{
 			Slice: sliceCopy,
 		}
@@ -177,9 +177,9 @@ func TestUTF8Close(t *testing.T) {
 	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
-			slice := append([]byte(nil), test.Slice...)
+			slice := []byte(string(test.Slice))
 
-			iterator := UTF8{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -204,9 +204,9 @@ func TestUTF8Close(t *testing.T) {
 }
 
 
-func TestUTF8ErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*UTF8)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

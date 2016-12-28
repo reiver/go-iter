@@ -1,10 +1,10 @@
-package iter
+package iterutf8
 
 import (
 	"fmt"
 )
 
-func (receiver *UTF8) Scan(dest ...interface{}) error {
+func (receiver *Slice) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
