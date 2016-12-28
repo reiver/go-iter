@@ -91,4 +91,4 @@ For example:
 		//@TODO
 	}
 */
-package iter
+package iterbool
