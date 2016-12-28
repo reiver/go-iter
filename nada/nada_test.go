@@ -1,4 +1,4 @@
-package iter
+package iternada
 
 import (
 	"testing"
@@ -38,7 +38,7 @@ var (
 	}
 )
 
-func TestNada(t *testing.T) {
+func TestSlice(t *testing.T) {
 
 	tests := []struct{
 		Slice []struct{}
@@ -61,7 +61,7 @@ func TestNada(t *testing.T) {
 
 		slice := append([]struct{}(nil), test.Slice...)
 
-		iterator := Nada{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -143,7 +143,7 @@ func TestNada(t *testing.T) {
 	}
 }
 
-func TestNadaClose(t *testing.T) {
+func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
 		Slice []struct{}
@@ -167,7 +167,7 @@ func TestNadaClose(t *testing.T) {
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
 			slice := append([]struct{}(nil), test.Slice...)
 
-			iterator := Nada{
+			iterator := Slice{
 				Slice: slice,
 			}
 
@@ -192,9 +192,9 @@ func TestNadaClose(t *testing.T) {
 	}
 }
 
-func TestNadaErrNilReceiver(t *testing.T) {
+func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Nada)(nil)
+	iterator := (*Slice)(nil)
 
 	{
 		err := iterator.Close()

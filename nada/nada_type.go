@@ -1,9 +1,9 @@
-package iter
+package iternada
 
 import (
 	"reflect"
 )
 
-func (receiver *Nada) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*struct{})(nil)).Elem()
 }
