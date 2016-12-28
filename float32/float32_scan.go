@@ -1,10 +1,10 @@
-package iter
+package iterfloat32
 
 import (
 	"fmt"
 )
 
-func (receiver *Float32) Scan(dest ...interface{}) error {
+func (receiver *Slice) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}

@@ -1,4 +1,4 @@
-package iter
+package iterfloat32
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestFloat32ScanIntoFloat32(t *testing.T) {
+func TestSliceScanIntoFloat32(t *testing.T) {
 
 	tests := []struct{
 		Slice []float32
@@ -29,7 +29,7 @@ func TestFloat32ScanIntoFloat32(t *testing.T) {
 
 		slice := append([]float32(nil), test.Slice...)
 
-		iterator := Float32{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestFloat32ScanIntoFloat32(t *testing.T) {
 	}
 }
 
-func TestFloat32ScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []float32
@@ -80,7 +80,7 @@ func TestFloat32ScanIntoInterface(t *testing.T) {
 
 		slice := append([]float32(nil), test.Slice...)
 
-		iterator := Float32{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -114,7 +114,7 @@ func TestFloat32ScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestFloat32ScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []float32
@@ -137,7 +137,7 @@ func TestFloat32ScanIntoScanner(t *testing.T) {
 
 		slice := append([]float32(nil), test.Slice...)
 
-		iterator := Float32{
+		iterator := Slice{
 			Slice: slice,
 		}
 

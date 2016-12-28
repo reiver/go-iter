@@ -1,9 +1,9 @@
-package iter
+package iterfloat32
 
 import (
 	"reflect"
 )
 
-func (receiver *Float32) Type() reflect.Type {
+func (receiver *Slice) Type() reflect.Type {
 	return reflect.TypeOf((*float32)(nil)).Elem()
 }
