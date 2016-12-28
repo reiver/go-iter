@@ -11,7 +11,7 @@ type common struct {
 	index int
 	mutex sync.RWMutex
 	closed bool
-	datum float64
+	datum interface{}
 }
 
 func (receiver *common) _close() error {
@@ -41,7 +41,7 @@ func (receiver *common) _decode(x interface{}) error {
 			return nil
 		}
 
-		*p = receiver.datum
+		*p = receiver.datum.(float64)
 	case *interface{}:
 		if nil == p {
 			return nil
@@ -68,7 +68,7 @@ func (receiver *common) _err() error {
 	return receiver.err
 }
 
-func (receiver *common) _next(fn func(int)(bool, float64, error)) bool {
+func (receiver *common) _next(fn func(int,interface{})(bool, error)) bool {
 	if nil == receiver {
 		return false
 	}
@@ -86,7 +86,9 @@ func (receiver *common) _next(fn func(int)(bool, float64, error)) bool {
 
 	index := receiver.index
 
-	next, datum, err := fn(index)
+	var datum interface{}
+
+	next, err := fn(index, &datum)
 	if nil != err {
 		receiver.err = err
 		return false

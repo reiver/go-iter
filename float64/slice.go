@@ -1,7 +1,7 @@
 package iterfloat64
 
 import (
-	"math"
+	"fmt"
 )
 
 type Slice struct {
@@ -60,21 +60,28 @@ func (receiver *Slice) Next() bool {
 	return receiver.common._next(receiver.next)
 }
 
-func (receiver *Slice) next(index int) (bool, float64, error) {
+func (receiver *Slice) next(index int, v interface{}) (bool, error) {
 	if nil == receiver {
-		return false, math.NaN(), errNilReceiver
+		return false, errNilReceiver
 	}
 
 	slice := receiver.Slice
 	if nil == slice  {
-		return false, math.NaN(), nil
+		return false, nil
 	}
 
 	if len(slice) <= index {
-		return false, math.NaN(), nil
+		return false, nil
 	}
 
 	datum := slice[index]
 
-	return true, datum, nil
+	switch t := v.(type) {
+	case *interface{}:
+		*t = datum
+	default:
+		return false, &internalBadTypeComplainer{fmt.Sprintf("%T", t)}
+	}
+
+	return true, nil
 }
