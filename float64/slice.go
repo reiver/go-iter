@@ -1,18 +1,12 @@
 package iterfloat64
 
 import (
-	"database/sql"
-	"fmt"
-	"sync"
+	"math"
 )
 
 type Slice struct {
 	Slice []float64
-	err error
-	index int
-	mutex sync.RWMutex
-	closed bool
-	datum float64
+	common
 }
 
 func (receiver *Slice) Close() error {
@@ -20,12 +14,7 @@ func (receiver *Slice) Close() error {
 		return errNilReceiver
 	}
 
-	receiver.mutex.Lock()
-	defer receiver.mutex.Unlock()
-
-	receiver.closed = true
-
-	return nil
+	return receiver.common._close()
 }
 
 // Decode stores the next datum in the data represented by the empty interface value `x`.
@@ -36,29 +25,7 @@ func (receiver *Slice) Decode(x interface{}) error {
 		return errNilReceiver
 	}
 
-	receiver.mutex.RLock()
-	defer receiver.mutex.RUnlock()
-
-	switch p := x.(type) {
-	case *float64:
-		if nil == p {
-			return nil
-		}
-
-		*p = receiver.datum
-	case *interface{}:
-		if nil == p {
-			return nil
-		}
-
-		*p = receiver.datum
-	case sql.Scanner:
-		return p.Scan(receiver.datum)
-	default:
-		return &internalBadTypeComplainer{fmt.Sprintf("%T", p)}
-	}
-
-	return nil
+	return receiver.common._decode(x)
 }
 
 // Err returns the error, if an error was encountered during an iteration.
@@ -68,10 +35,7 @@ func (receiver *Slice) Err() error {
 		return errNilReceiver
 	}
 
-	receiver.mutex.RLock()
-	defer receiver.mutex.RUnlock()
-
-	return receiver.err
+	return receiver.common._err()
 }
 
 // Next prepares the next datum for reading via the Decode method.
@@ -93,29 +57,24 @@ func (receiver *Slice) Next() bool {
 		return false
 	}
 
-	receiver.mutex.Lock()
-	defer receiver.mutex.Unlock()
+	return receiver.common._next(receiver.next)
+}
 
-	if nil != receiver.err {
-		return false
-	}
-
-	if receiver.closed {
-		return false
+func (receiver *Slice) next(index int) (bool, float64, error) {
+	if nil == receiver {
+		return false, math.NaN(), errNilReceiver
 	}
 
 	slice := receiver.Slice
 	if nil == slice  {
-		return false
+		return false, math.NaN(), nil
 	}
 
-	index := receiver.index
 	if len(slice) <= index {
-		return false
+		return false, math.NaN(), nil
 	}
 
-	receiver.datum = slice[index]
-	receiver.index++
+	datum := slice[index]
 
-	return true
+	return true, datum, nil
 }

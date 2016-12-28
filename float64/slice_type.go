@@ -5,5 +5,5 @@ import (
 )
 
 func (receiver *Slice) Type() reflect.Type {
-	return reflect.TypeOf((*float64)(nil)).Elem()
+	return receiver.common._type()
 }
