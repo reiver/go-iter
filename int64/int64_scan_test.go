@@ -1,4 +1,4 @@
-package iter
+package iterint64
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestInt64ScanIntoInt64(t *testing.T) {
+func TestSliceScanIntoInt64(t *testing.T) {
 
 	tests := []struct{
 		Slice []int64
@@ -29,7 +29,7 @@ func TestInt64ScanIntoInt64(t *testing.T) {
 
 		slice := append([]int64(nil), test.Slice...)
 
-		iterator := Int64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -57,7 +57,7 @@ func TestInt64ScanIntoInt64(t *testing.T) {
 	}
 }
 
-func TestInt64ScanIntoInterface(t *testing.T) {
+func TestSliceScanIntoInterface(t *testing.T) {
 
 	tests := []struct{
 		Slice []int64
@@ -80,7 +80,7 @@ func TestInt64ScanIntoInterface(t *testing.T) {
 
 		slice := append([]int64(nil), test.Slice...)
 
-		iterator := Int64{
+		iterator := Slice{
 			Slice: slice,
 		}
 
@@ -114,7 +114,7 @@ func TestInt64ScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestInt64ScanIntoScanner(t *testing.T) {
+func TestSliceScanIntoScanner(t *testing.T) {
 
 	tests := []struct{
 		Slice []int64
@@ -137,7 +137,7 @@ func TestInt64ScanIntoScanner(t *testing.T) {
 
 		slice := append([]int64(nil), test.Slice...)
 
-		iterator := Int64{
+		iterator := Slice{
 			Slice: slice,
 		}
 

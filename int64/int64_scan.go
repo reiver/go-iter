@@ -1,10 +1,10 @@
-package iter
+package iterint64
 
 import (
 	"fmt"
 )
 
-func (receiver *Int64) Scan(dest ...interface{}) error {
+func (receiver *Slice) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}
