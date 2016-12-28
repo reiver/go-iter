@@ -1,6 +1,9 @@
 /*
 Package iterbyte provides tools for creating iterators for the byte type.
 
+NOTE: if you want to deal with UTF-8 encoded data in a []byte, use "iterutf8" instead.
+(Docs: https://godoc.org/github.com/reiver/go-iter/utf8 )
+
 These iterators are intentionally made to resemble *sql.Rows from the "database/sql" package.
 Including having the same Close, Err, Next, and Scan methods.
 
