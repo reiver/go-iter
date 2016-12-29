@@ -2,6 +2,8 @@ package iterfloat64
 
 import (
 	"github.com/reiver/go-iter/kernel"
+
+	"reflect"
 )
 
 type Slice struct {
@@ -25,4 +27,8 @@ func (receiver *Slice) Err() error {
 	}
 
 	return receiver.kernel.KernelErr()
+}
+
+func (receiver *Slice) Type() reflect.Type {
+	return reflect.TypeOf((*float64)(nil)).Elem()
 }
