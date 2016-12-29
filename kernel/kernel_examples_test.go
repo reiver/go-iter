@@ -115,7 +115,7 @@ func (receiver *MyStructIterator) next(index int, v interface{}) (bool, error) {
 	return true, nil
 }
 
-func ExampleSlice() {
+func ExampleKernel() {
 
 	slice := []MyStruct{
 		MyStruct{
