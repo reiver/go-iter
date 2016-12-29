@@ -23,7 +23,7 @@ func (receiver *Slice) Next() bool {
 		return false
 	}
 
-	return receiver.nucleus._next(receiver.next)
+	return receiver.kernel.KernelNext(receiver.next)
 }
 
 func (receiver *Slice) next(index int, v interface{}) (bool, error) {

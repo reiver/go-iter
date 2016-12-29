@@ -1,8 +1,12 @@
 package iterfloat64
 
+import (
+	"github.com/reiver/go-iter/kernel"
+)
+
 type Slice struct {
 	Slice []float64
-	nucleus
+	kernel iterkernel.Kernel
 }
 
 func (receiver *Slice) Close() error {
@@ -10,7 +14,7 @@ func (receiver *Slice) Close() error {
 		return errNilReceiver
 	}
 
-	return receiver.nucleus._close()
+	return receiver.kernel.KernelClose()
 }
 
 // Err returns the error, if an error was encountered during an iteration.
@@ -20,5 +24,5 @@ func (receiver *Slice) Err() error {
 		return errNilReceiver
 	}
 
-	return receiver.nucleus._err()
+	return receiver.kernel.KernelErr()
 }

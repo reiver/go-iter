@@ -8,5 +8,5 @@ func (receiver *Slice) Decode(x interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.nucleus._decode(nil, x)
+	return receiver.kernel.KernelDecode(nil, x)
 }

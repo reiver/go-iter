@@ -6,5 +6,5 @@ func (receiver *Slice) Scan(dest ...interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.nucleus._scan(nil, dest...)
+	return receiver.kernel.KernelScan(nil, dest...)
 }
