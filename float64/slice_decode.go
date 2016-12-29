@@ -8,33 +8,5 @@ func (receiver *Slice) Decode(x interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.nucleus._decode(receiver.decode, x)
-}
-
-func (receiver *Slice) decode(x interface{}) (bool, error) {
-	if nil == receiver {
-		return false, errNilReceiver
-	}
-
-	if nil == x {
-		return false, nil
-	}
-
-	f64, err := receiver.nucleus._datum()
-	if nil != err {
-		return false, err
-	}
-
-	switch p := x.(type) {
-	case *float64:
-                if nil == p {
-                        return true, nil
-                }
-
-                *p = f64
-
-		return true, nil
-	default:
-                return false, nil
-	}
+	return receiver.nucleus._decode(nil, x)
 }
