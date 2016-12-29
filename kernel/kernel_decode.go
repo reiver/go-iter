@@ -3,6 +3,7 @@ package iterkernel
 import (
 	"database/sql"
 	"fmt"
+	"time"
 )
 
 func (receiver *Kernel) KernelDecode(fn func(interface{})(bool,error), x interface{}) error {
@@ -299,15 +300,53 @@ func (receiver *Kernel) KernelDecode(fn func(interface{})(bool,error), x interfa
 		*p = receiver.datum
 
 		return nil
+	}
+
+	// According to the docs for sql.Scanner: https://golang.org/pkg/database/sql/#Scanner
+	//
+	//	"""
+	//		The src value will be of one of the following types:
+	//		
+	//		int64
+	//		float64
+	//		bool
+	//		[]byte
+	//		string
+	//		time.Time
+	//		nil - for NULL values
+	//	"""
+	//
+	// So, if the datum is one of those types, then we send it to Scan.
+	//
+	// If the datum is not one of those types, BUT can be safely converted
+	// to one of those types (ex: uint8 -> int64), then we do the conversion
+	// and then send that to Scan.
+	switch p := x.(type) {
 	case sql.Scanner:
-//@TODO: Should this be converted into the types that sql.Scanner supports?
-		return p.Scan(receiver.datum)
-	default:
-		return &internalBadTypeComplainer{
-			actualType: fmt.Sprintf("%T", p),
-			sourceType: fmt.Sprintf("%T", receiver.datum),
+		switch t := receiver.datum.(type) {
+		case int64, float64, bool, []byte, string, time.Time:
+			return p.Scan(t)
+		case float32:
+			return p.Scan( float64(t) )
+		case int8:
+			return p.Scan( int64(t) )
+		case int16:
+			return p.Scan( int64(t) )
+		case int32:
+			return p.Scan( int64(t) )
+		case uint8:
+			return p.Scan( int64(t) )
+		case uint16:
+			return p.Scan( int64(t) )
+		case uint32:
+			return p.Scan( int64(t) )
 		}
 	}
 
-	return nil
+
+	return &internalBadTypeComplainer{
+		actualType: fmt.Sprintf("%T", x),
+		sourceType: fmt.Sprintf("%T", receiver.datum),
+	}
+
 }
