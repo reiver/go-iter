@@ -61,6 +61,16 @@ func (receiver *Kernel) KernelDecode(fn func(interface{})(bool,error), x interfa
 	return nil
 }
 
+// KernelErr returns any errors that occurred when KerneNext was called, if there are any.
+// (There might not have been any.)
+//
+// It is the partner of the Next method found in common iterators:
+//
+//	Err() error
+//
+// The error could come from this kernel itself.
+//
+// Also, the error could come from the func passed to KernelNext.
 func (receiver *Kernel) KernelErr() error {
 	if nil == receiver {
 		return errNilReceiver
