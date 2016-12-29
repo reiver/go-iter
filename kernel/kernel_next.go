@@ -41,6 +41,28 @@ package iterkernel
 //
 //	return false, nil
 //
+// An example func might look like:
+//
+//	func (iterationNumber int, v interface{}) (bool, error) {
+//		if 10 < index {
+//			return false, nil
+//		}
+//		
+//		x := float64(index)
+//		
+//		datum := x*x
+//
+//		p, ok := v.(*interface{})
+//		if !ok {
+//			return false, errInternalError
+//		}
+//		
+//		*p = datum
+//		
+//		return true, nil
+//	}
+//
+// That example would produce the sequence: 0.0, 1.0, 4.0, 9,0, 25,0, 36.0, 49.0, 64.0, 81.0.
 func (receiver *Kernel) KernelNext(fn func(int,interface{})(bool, error)) bool {
 	if nil == receiver {
 		return false
