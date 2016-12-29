@@ -6,6 +6,15 @@ import (
 	"sync"
 )
 
+// Kernel deals with the "book keeping" needed when creating a common iterator.
+//
+// For example:
+// making it so calling Close stops Next from being able to load anther value;
+// dealing with having an error that occurred when Next is called get returned  when Err is called;
+// dealing with decoding & scanning into a *interface{},
+// dealing with decoding & scanning into a sql.Scanner,
+// and dealing with the read-write mutex so that this can be safely accessed from multiple threads,
+// etc.
 type Kernel struct {
 	err error
 	index int
