@@ -19,6 +19,7 @@ type MyStruct struct {
 	Cherry float64
 }
 
+// MyStructIterator is a custom iterator for our custom struct: MyStruct.
 type MyStructIterator struct {
 	kernel iterkernel.Kernel // <--------- THIS IS WHERE WE ARE PUTTING THE KERNEL.
 	Slice []MyStruct
