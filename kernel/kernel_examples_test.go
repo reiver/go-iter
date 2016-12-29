@@ -20,7 +20,7 @@ type MyStruct struct {
 }
 
 type MyStructIterator struct {
-	kernel iterkernel.Kernel
+	kernel iterkernel.Kernel // <--------- THIS IS WHERE WE ARE PUTTING THE KERNEL.
 	Slice []MyStruct
 }
 
@@ -29,7 +29,7 @@ func (receiver *MyStructIterator) Close() error {
 		return errNilReceiver
 	}
 
-	return receiver.kernel.KernelClose()
+	return receiver.kernel.KernelClose() // <--------- THE KERNEL IS DOING ALL THE WORK HERE, FOR THIS METHOD.
 }
 
 func (receiver *MyStructIterator) Decode(x interface{}) error {
@@ -37,7 +37,7 @@ func (receiver *MyStructIterator) Decode(x interface{}) error {
 		return errNilReceiver
 	}
 
-	return receiver.kernel.KernelDecode(receiver.decode, x)
+	return receiver.kernel.KernelDecode(receiver.decode, x) // <--------- THE KERNEL IS DOING ALL THE WORK HERE, FOR THIS METHOD.
 }
 
 func (receiver *MyStructIterator) decode(x interface{}) (bool, error) {
@@ -49,7 +49,7 @@ func (receiver *MyStructIterator) decode(x interface{}) (bool, error) {
 		return false, nil
 	}
 
-	datum, err := receiver.kernel.KernelDatum()
+	datum, err := receiver.kernel.KernelDatum() // <--------- HERE WE ARE CALLING THE KERNEL.
 	if nil != err {
 		return false, err
 	}
@@ -78,7 +78,7 @@ func (receiver *MyStructIterator) Err() error {
 		return errNilReceiver
 	}
 
-	return receiver.kernel.KernelErr()
+	return receiver.kernel.KernelErr() // <--------- THE KERNEL IS DOING ALL THE WORK HERE, FOR THIS METHOD.
 }
 
 func (receiver *MyStructIterator) Next() bool {
@@ -86,7 +86,7 @@ func (receiver *MyStructIterator) Next() bool {
 		return false
 	}
 
-	return receiver.kernel.KernelNext(receiver.next)
+	return receiver.kernel.KernelNext(receiver.next) // <--------- HERE WE ARE CALLING THE KERNEL.
 }
 
 func (receiver *MyStructIterator) next(index int, v interface{}) (bool, error) {
