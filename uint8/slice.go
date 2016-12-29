@@ -3,6 +3,7 @@ package iteruint8
 import (
 	"database/sql"
 	"fmt"
+	"reflect"
 	"sync"
 )
 
@@ -154,4 +155,8 @@ func (receiver *Slice) Next() bool {
 	receiver.index++
 
 	return true
+}
+
+func (receiver *Slice) Type() reflect.Type {
+	return reflect.TypeOf((*uint8)(nil)).Elem()
 }
