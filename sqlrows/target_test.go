@@ -96,6 +96,62 @@ func TestTargetBytes(t *testing.T) {
 	}
 }
 
+func TestTargetFloat32(t *testing.T) {
+
+	tests := []struct{
+		Value float32
+	}{
+		{
+			Value: -math.MaxFloat32,
+		},
+		{
+			Value: -1.0,
+		},
+		{
+			Value: -math.SmallestNonzeroFloat32,
+		},
+		{
+			Value: 0.0,
+		},
+		{
+			Value: math.SmallestNonzeroFloat32,
+		},
+		{
+			Value: 1.0,
+		},
+		{
+			Value: math.MaxFloat32,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case float32:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
 func TestTargetFloat64(t *testing.T) {
 
 	tests := []struct{
@@ -144,6 +200,206 @@ func TestTargetFloat64(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case float64:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetInt(t *testing.T) {
+
+	tests := []struct{
+		Value int
+	}{
+		{
+			Value: math.MinInt32,
+		},
+		{
+			Value: -1,
+		},
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxInt32,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case int:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetInt8(t *testing.T) {
+
+	tests := []struct{
+		Value int8
+	}{
+		{
+			Value: math.MinInt8,
+		},
+		{
+			Value: -1,
+		},
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxInt8,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case int8:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetInt16(t *testing.T) {
+
+	tests := []struct{
+		Value int16
+	}{
+		{
+			Value: math.MinInt16,
+		},
+		{
+			Value: -1,
+		},
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxInt16,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case int16:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetInt32(t *testing.T) {
+
+	tests := []struct{
+		Value int32
+	}{
+		{
+			Value: math.MinInt32,
+		},
+		{
+			Value: -1,
+		},
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxInt32,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case int32:
 			if expected, actual := test.Value, casted; expected != actual {
 				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
 				continue
@@ -295,6 +551,226 @@ func TestTargetTime(t *testing.T) {
 			continue
 		case time.Time:
 			if expected, actual := test.Value, casted; !expected.Equal(actual) {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetUint(t *testing.T) {
+
+	tests := []struct{
+		Value uint
+	}{
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxUint32,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case uint:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetUint8(t *testing.T) {
+
+	tests := []struct{
+		Value uint8
+	}{
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxUint8,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case uint8:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetUint16(t *testing.T) {
+
+	tests := []struct{
+		Value uint16
+	}{
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxUint16,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case uint16:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetUint32(t *testing.T) {
+
+	tests := []struct{
+		Value uint32
+	}{
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxUint32,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case uint32:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetUint64(t *testing.T) {
+
+	tests := []struct{
+		Value uint64
+	}{
+		{
+			Value: 0,
+		},
+		{
+			Value: 1,
+		},
+		{
+			Value: math.MaxUint64,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case uint64:
+			if expected, actual := test.Value, casted; expected != actual {
 				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
 				continue
 			}
