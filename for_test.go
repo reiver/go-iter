@@ -38,7 +38,7 @@ func TestForSingle(t *testing.T) {
 	}
 }
 
-func TestForMant(t *testing.T) {
+func TestForMany(t *testing.T) {
 
 	slice := []string{
 		"Apple",
