@@ -8,7 +8,8 @@ import (
 
 func TestDecode(t *testing.T) {
 
-	now := time.Now()
+	now  := time.Now()
+	then := time.Now().Add( -5 * time.Hour )
 
 	colScanner := &mockColumnScanner{
 		ColumnNames: []string{
@@ -19,6 +20,8 @@ func TestDecode(t *testing.T) {
 			"when_created",
 			"file_data",
 			"greeting",
+			"when_cleared",
+			"when_reset",
 		},
 		ColumnsErr:    nil,
 		ScanValues:  []interface{}{
@@ -30,18 +33,22 @@ func TestDecode(t *testing.T) {
 			now,
 			[]byte("apple banana cherry"),
 			"Hello world!",
+			nil,
+			&then,
 		},
 	}
 
 	type MyStruct struct {
-		FruitName   string    `iter:"fruit_name"`
-		PersonName  string    `iter.name:"name"`
-		Age         int64     `iter.target.name:"age"`
-		Height      float64   `iter:"height"`
-		IsFemale    bool      `iter.name:"is_female"`
-		WhenCreated time.Time `iter.target.name:"when_created"`
-		File      []byte      `iter:"file_data"`
-		Greeting    target    `iter.name:"greeting"`
+		FruitName    string    `iter:"fruit_name"`
+		PersonName   string    `iter.name:"name"`
+		Age          int64     `iter.target.name:"age"`
+		Height       float64   `iter:"height"`
+		IsFemale     bool      `iter.name:"is_female"`
+		WhenCreated  time.Time `iter.target.name:"when_created"`
+		File       []byte      `iter:"file_data"`
+		Greeting     target    `iter.name:"greeting"`
+		WhenCleared *time.Time `iter:"when_cleared"`
+		WhenReset   *time.Time `iter:"when_reset"`
 	}
 
 	var myStruct MyStruct

@@ -269,7 +269,18 @@ func decode(colScanner columnScanner, v interface{}) error {
 					err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
 					return err
 				}
-
+			case reflect.Ptr:
+				if nil == value {
+					castedValue = nil
+				} else {
+					switch casted := value.(type) {
+					case *time.Time:
+						castedValue = casted
+					default:
+						err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
+						return err
+					}
+				}
 			default:
 				err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
 				return err
@@ -279,10 +290,14 @@ func decode(colScanner columnScanner, v interface{}) error {
 		if err := func() (err error) {
 			defer func() {
 				if r := recover(); nil != r {
-					err = fmt.Errorf("Could not set value ([%T] %v) for struct field named %q because: (%T) %v", castedValue, castedValue, name, r, r)
+					err = fmt.Errorf("Could not set value ([%T] %v) for struct field named %q (%T) because: (%T) %v", castedValue, castedValue, name, reflectedFieldValue.Interface(), r, r)
 				}
 			}()
-			reflectedFieldValue.Set( reflect.ValueOf(castedValue) )
+			if nil == castedValue {
+				reflectedFieldValue.Set( reflect.Zero(reflectedFieldValue.Type()) )
+			} else {
+				reflectedFieldValue.Set( reflect.ValueOf(castedValue) )
+			}
 			return nil
 		}(); nil != err {
 			return err

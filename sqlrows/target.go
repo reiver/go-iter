@@ -10,8 +10,10 @@ const (
 	targetTypeBytes   = "[]byte"
 	targetTypeFloat64 = "float64"
 	targetTypeInt64   = "int64"
+	targetTypeNil     = "nil"
 	targetTypeString  = "string"
 	targetTypeTime    = "time.Time"
+	targetTypeTimePtr = "*time.Time"
 )
 
 // target represents something that can be either a bool, []byte, float64, int64, string, or time.Time.
@@ -22,12 +24,14 @@ const (
 type target struct {
 	typ string
 
-	boolValue    bool
-	bytesValue []byte
-	float64Value float64
-	int64Value   int64
-	stringValue  string
-	timeValue    time.Time
+	boolValue     bool
+	bytesValue  []byte
+	float64Value  float64
+	int64Value    int64
+	nilValue      interface{}
+	stringValue   string
+	timeValue     time.Time
+	timePtrValue *time.Time
 }
 
 
@@ -43,10 +47,14 @@ func (receiver target) Interface() (interface{}, error) {
 		return receiver.float64Value, nil
 	case targetTypeInt64:
 		return receiver.int64Value, nil
+	case targetTypeNil:
+		return receiver.nilValue, nil
 	case targetTypeString:
 		return receiver.stringValue, nil
 	case targetTypeTime:
 		return receiver.timeValue, nil
+	case targetTypeTimePtr:
+		return receiver.timePtrValue, nil
 	default:
 		return nil, fmt.Errorf("Unsupported Type: %q", t)
 	}
@@ -82,7 +90,16 @@ func (receiver *target) Scan(src interface{}) error {
 		receiver.typ = targetTypeTime
 		receiver.timeValue = t
 		return nil
+	case *time.Time:
+		receiver.typ = targetTypeTimePtr
+		receiver.timePtrValue = t
+		return nil
 	default:
+		if nil == t {
+			receiver.typ = targetTypeNil
+			receiver.nilValue = nil
+			return nil
+		}
 		return fmt.Errorf("Unsupported Type: %T", t)
 	}
 }
@@ -101,10 +118,14 @@ func (receiver *target) String() string {
 		return fmt.Sprintf("%v", receiver.float64Value)
 	case targetTypeInt64:
 		return fmt.Sprintf("%v", receiver.int64Value)
+	case targetTypeNil:
+		return fmt.Sprintf("%v", receiver.nilValue)
 	case targetTypeString:
 		return fmt.Sprintf("%v", receiver.stringValue)
 	case targetTypeTime:
 		return fmt.Sprintf("%v", receiver.timeValue)
+	case targetTypeTimePtr:
+		return fmt.Sprintf("%v", receiver.timePtrValue)
 	default:
 		panic(fmt.Errorf("Internal Error: Unsupported Type: %T", receiver.typ))
 	}
