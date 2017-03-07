@@ -258,7 +258,7 @@ func decode(colScanner columnScanner, v interface{}) error {
 				case []byte:
 					castedValue = casted
 				default:
-					err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
+					err := fmt.Errorf("Cannot cast into something of type %T, for struct field target named %q.", value, name)
 					return err
 				}
 			case reflect.Struct:
@@ -266,7 +266,7 @@ func decode(colScanner columnScanner, v interface{}) error {
 				case time.Time:
 					castedValue = casted
 				default:
-					err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
+					err := fmt.Errorf("Cannot cast into something of type %T, for struct field target named %q.", value, name)
 					return err
 				}
 			case reflect.Ptr:
@@ -274,15 +274,43 @@ func decode(colScanner columnScanner, v interface{}) error {
 					castedValue = nil
 				} else {
 					switch casted := value.(type) {
-					case *time.Time:
-						castedValue = casted
+					case bool:
+						castedValue = &casted
+					case float32:
+						castedValue = &casted
+					case float64:
+						castedValue = &casted
+					case int:
+						castedValue = &casted
+					case int8:
+						castedValue = &casted
+					case int16:
+						castedValue = &casted
+					case int32:
+						castedValue = &casted
+					case int64:
+						castedValue = &casted
+					case string:
+						castedValue = &casted
+					case time.Time:
+						castedValue = &casted
+					case uint:
+						castedValue = &casted
+					case uint8:
+						castedValue = &casted
+					case uint16:
+						castedValue = &casted
+					case uint32:
+						castedValue = &casted
+					case uint64:
+						castedValue = &casted
 					default:
-						err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
+						err := fmt.Errorf("Cannot cast into something of type %T, for struct field target named %q.", value, name)
 						return err
 					}
 				}
 			default:
-				err := fmt.Errorf("Cannot cast into something of type %T, for struct field target name %q.", value, name)
+				err := fmt.Errorf("Cannot cast into something of type %T, for struct field target named %q.", value, name)
 				return err
 			}
 		}
