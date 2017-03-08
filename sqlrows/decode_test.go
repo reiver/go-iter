@@ -86,6 +86,10 @@ func TestDecode(t *testing.T) {
 			"my_uint64",
 			"my_uint64_ptr",
 			"my_uint64_ptr_nil",
+
+			"my_string_from_byte_slice",
+			"my_string_ptr_from_byte_slice",
+			"my_string_ptr_from_byte_slice_nil",
 		},
 		ColumnsErr:    nil,
 		ScanValues:  []interface{}{
@@ -159,6 +163,10 @@ func TestDecode(t *testing.T) {
 			uint64(9),                          // my_uint64
 			uint64(10),                         // my_uint64_ptr
 			nil,                                // my_uint64_ptr_nil
+
+			[]byte("ONE"),                      // my_string_from_byte_slice
+			[]byte("two THREE"),                // my_string_ptr_from_byte_slice
+			nil,                                // my_string_ptr_from_byte_slice_nil
 		},
 	}
 
@@ -232,6 +240,11 @@ func TestDecode(t *testing.T) {
 		MyUint64          uint64    `iter:"my_uint64"`
 		MyUint64Ptr      *uint64    `iter:"my_uint64_ptr"`
 		MyUint64PtrNil   *uint64    `iter:"my_uint64_ptr_nil"`
+
+		MyStringFromByteSlice        string `iter:"my_string_from_byte_slice"`
+		MyStringPtrFromByteSlice    *string `iter:"my_string_ptr_from_byte_slice"`
+		MyStringPtrFromByteSliceNil *string `iter:"my_string_ptr_from_byte_slice_nil"`
+
 	}
 
 	var myStruct MyStruct
@@ -521,6 +534,21 @@ func TestDecode(t *testing.T) {
 		return
 	}
 	if expected, actual := (*uint64)(nil), myStruct.MyUint64PtrNil; expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+
+
+
+	if expected, actual := "ONE", myStruct.MyStringFromByteSlice; expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+	if expected, actual := "two THREE", *myStruct.MyStringPtrFromByteSlice; expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+	if expected, actual := (*string)(nil), myStruct.MyStringPtrFromByteSliceNil; expected != actual {
 		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
 		return
 	}
