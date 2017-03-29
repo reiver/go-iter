@@ -254,12 +254,16 @@ func decode(colScanner columnScanner, v interface{}) error {
 				castedValue = casted
 
 			case reflect.Slice:
-				switch casted := value.(type) {
-				case []byte:
-					castedValue = casted
-				default:
-					err := fmt.Errorf("Cannot cast into something of type %T, for struct field target named %q (%T).", value, name, reflectedFieldValue.Interface())
-					return err
+				if nil == value {
+					castedValue = nil
+				} else {
+					switch casted := value.(type) {
+					case []byte:
+						castedValue = casted
+					default:
+						err := fmt.Errorf("Cannot cast into something of type %T, for struct field target named %q (%T).", value, name, reflectedFieldValue.Interface())
+						return err
+					}
 				}
 			case reflect.Struct:
 				switch casted := value.(type) {
