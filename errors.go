@@ -6,7 +6,7 @@ import (
 
 var (
 	errClosed            = errors.New("Closed")
-	errEmptyIterator     = errors.New("Empty Iterator")
+	errEmptyIterator     = internalEmptyIteratorComplainer{}
 	errInternalError     = errors.New("Internal Error")
 	errNilIterator       = errors.New("Nil Iterator")
 	errNilReceiver       = errors.New("Nil Receiver")

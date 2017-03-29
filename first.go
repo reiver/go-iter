@@ -10,6 +10,14 @@ package iter
 //	iterator := ...
 //	
 //	err := iter.First{Iterator: iterator}.Decode(v)
+//	if nil != err {
+//		switch {
+//		case iter.EmptyIteratorComplainer:
+//			//@TODO
+//		default:
+//			return err
+//		}
+//	}
 type First struct {
 	Iterator Iterator
 }
