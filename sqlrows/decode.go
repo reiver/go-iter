@@ -341,6 +341,31 @@ func decode(colScanner columnScanner, v interface{}) error {
 
 					case []byte:
 						switch reflectedFieldValue.Interface().(type) {
+						case *big.Rat:
+							r := new(big.Rat)
+							_, err := fmt.Sscan(string(casted), r)
+							if nil != err {
+								return fmt.Errorf("Problem parsing string into *math/big.Rat, because: (%T) %v", err, err)
+							}
+
+							castedValue = r
+						case *big.Float:
+							// If there is a "." in the string (representation of the number),
+							// then this may be one too long.
+							//
+							// Going to ignore that for now.
+							precInt := utf8.RuneCount(casted)
+							if 0 > precInt {
+								return fmt.Errorf("Negative rune count of string: %d", precInt)
+							}
+							prec := uint(precInt)
+
+							f, _, err := big.ParseFloat(string(casted), 10, prec, big.ToNearestEven)
+							if nil != err {
+								return err
+							}
+
+							castedValue = f
 						case []byte:
 							castedValue = casted
 						case string:

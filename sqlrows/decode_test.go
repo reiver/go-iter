@@ -94,6 +94,8 @@ func TestDecode(t *testing.T) {
 
 			"my_math_big_rat_ptr",
 			"my_math_big_float_ptr",
+			"my_math_big_rat_ptr_from_byte_slice",
+			"my_math_big_float_ptr_from_byte_slice",
 		},
 		ColumnsErr:    nil,
 		ScanValues:  []interface{}{
@@ -172,8 +174,10 @@ func TestDecode(t *testing.T) {
 			[]byte("two THREE"),                // my_string_ptr_from_byte_slice
 			nil,                                // my_string_ptr_from_byte_slice_nil
 
-			"3.14159265358979323846264338327950", // "my_math_big_rat_ptr"
-			"3.14159265358979323846264338327950", // "my_math_big_float_ptr"
+			"3.14159265358979323846264338327950",         // "my_math_big_rat_ptr"
+			"3.14159265358979323846264338327950",         // "my_math_big_float_ptr"
+			[]byte("2.71828182845904523536028747135266"), // "my_math_big_rat_ptr_from_byte_slice"
+			[]byte("2.71828182845904523536028747135266"), // "my_math_big_float_ptr_from_byte_slice"
 		},
 	}
 
@@ -254,6 +258,8 @@ func TestDecode(t *testing.T) {
 
 		MyMathBigRatPtr   *big.Rat   `iter:"my_math_big_rat_ptr"`
 		MyMathBigFloatPtr *big.Float `iter:"my_math_big_float_ptr"`
+		MyMathBigRatPtrFromByteSlice   *big.Rat   `iter:"my_math_big_rat_ptr_from_byte_slice"`
+		MyMathBigFloatPtrFromByteSlice *big.Float `iter:"my_math_big_float_ptr_from_byte_slice"`
 	}
 
 	var myStruct MyStruct
@@ -569,6 +575,14 @@ func TestDecode(t *testing.T) {
 		return
 	}
 	if expected, actual := "3.141592654", myStruct.MyMathBigFloatPtr.Text('g', 10); expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+	if expected, actual := "135914091422952261768014373567633/50000000000000000000000000000000", myStruct.MyMathBigRatPtrFromByteSlice.String(); expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+	if expected, actual := "2.718281829", myStruct.MyMathBigFloatPtrFromByteSlice.Text('g', 10); expected != actual {
 		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
 		return
 	}
