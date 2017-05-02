@@ -96,6 +96,7 @@ func TestDecode(t *testing.T) {
 			"my_math_big_float_ptr",
 			"my_math_big_rat_ptr_from_byte_slice",
 			"my_math_big_float_ptr_from_byte_slice",
+			"my_other_math_big_float_ptr",
 		},
 		ColumnsErr:    nil,
 		ScanValues:  []interface{}{
@@ -178,6 +179,7 @@ func TestDecode(t *testing.T) {
 			"3.14159265358979323846264338327950",         // "my_math_big_float_ptr"
 			[]byte("2.71828182845904523536028747135266"), // "my_math_big_rat_ptr_from_byte_slice"
 			[]byte("2.71828182845904523536028747135266"), // "my_math_big_float_ptr_from_byte_slice"
+			"0.1", // "my_other_math_big_float_ptr"
 		},
 	}
 
@@ -260,6 +262,7 @@ func TestDecode(t *testing.T) {
 		MyMathBigFloatPtr *big.Float `iter:"my_math_big_float_ptr"`
 		MyMathBigRatPtrFromByteSlice   *big.Rat   `iter:"my_math_big_rat_ptr_from_byte_slice"`
 		MyMathBigFloatPtrFromByteSlice *big.Float `iter:"my_math_big_float_ptr_from_byte_slice"`
+		MyOtherMathBigFloatPtr *big.Float `iter:"my_other_math_big_float_ptr"`
 	}
 
 	var myStruct MyStruct
@@ -582,7 +585,11 @@ func TestDecode(t *testing.T) {
 		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
 		return
 	}
-	if expected, actual := "2.718281829", myStruct.MyMathBigFloatPtrFromByteSlice.Text('g', 10); expected != actual {
+	if expected, actual := "2.71828182845904523536028747135266", myStruct.MyMathBigFloatPtrFromByteSlice.Text('g', 33); expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+	if expected, actual := "0.1", myStruct.MyOtherMathBigFloatPtr.Text('g', 10); expected != actual {
 		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
 		return
 	}

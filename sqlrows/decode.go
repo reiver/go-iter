@@ -8,7 +8,6 @@ import (
 	"math/big"
 	"reflect"
 	"time"
-	"unicode/utf8"
 )
 
 const (
@@ -307,15 +306,7 @@ func decode(colScanner columnScanner, v interface{}) error {
 
 							castedValue = r
 						case *big.Float:
-							// If there is a "." in the string (representation of the number),
-							// then this may be one too long.
-							//
-							// Going to ignore that for now.
-							precInt := utf8.RuneCountInString(casted)
-							if 0 > precInt {
-								return fmt.Errorf("Negative rune count of string: %d", precInt)
-							}
-							prec := uint(precInt)
+							const prec = 400
 
 							f, _, err := big.ParseFloat(casted, 10, prec, big.ToNearestEven)
 							if nil != err {
@@ -350,15 +341,7 @@ func decode(colScanner columnScanner, v interface{}) error {
 
 							castedValue = r
 						case *big.Float:
-							// If there is a "." in the string (representation of the number),
-							// then this may be one too long.
-							//
-							// Going to ignore that for now.
-							precInt := utf8.RuneCount(casted)
-							if 0 > precInt {
-								return fmt.Errorf("Negative rune count of string: %d", precInt)
-							}
-							prec := uint(precInt)
+							const prec = 400
 
 							f, _, err := big.ParseFloat(string(casted), 10, prec, big.ToNearestEven)
 							if nil != err {
