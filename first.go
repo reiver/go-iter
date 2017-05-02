@@ -46,9 +46,6 @@ func (receiver First) decode(v interface{}) (err error) {
 	if err := iterator.Decode(v); nil != err {
 		return err
 	}
-	if iterator.Next() {
-		return errTooManyIterations
-	}
 	if err := iterator.Err(); nil != err {
 		return err
 	}
