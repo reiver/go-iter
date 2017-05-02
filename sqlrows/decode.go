@@ -5,8 +5,10 @@ import (
 
 	"database/sql"
 	"fmt"
+	"math/big"
 	"reflect"
 	"time"
+	"unicode/utf8"
 )
 
 const (
@@ -295,7 +297,35 @@ func decode(colScanner columnScanner, v interface{}) error {
 					case int64:
 						castedValue = &casted
 					case string:
-						castedValue = &casted
+						switch reflectedFieldValue.Interface().(type) {
+						case *big.Rat:
+							r := new(big.Rat)
+							_, err := fmt.Sscan(casted, r)
+							if nil != err {
+								return fmt.Errorf("Problem parsing string into *math/big.Rat, because: (%T) %v", err, err)
+							}
+
+							castedValue = r
+						case *big.Float:
+							// If there is a "." in the string (representation of the number),
+							// then this may be one too long.
+							//
+							// Going to ignore that for now.
+							precInt := utf8.RuneCountInString(casted)
+							if 0 > precInt {
+								return fmt.Errorf("Negative rune count of string: %d", precInt)
+							}
+							prec := uint(precInt)
+
+							f, _, err := big.ParseFloat(casted, 10, prec, big.ToNearestEven)
+							if nil != err {
+								return err
+							}
+
+							castedValue = f
+						default:
+							castedValue = &casted
+						}
 					case time.Time:
 						castedValue = &casted
 					case uint:

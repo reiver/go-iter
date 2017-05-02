@@ -2,6 +2,7 @@ package itersqlrows
 
 import (
 	"math"
+	"math/big"
 	"time"
 
 	"testing"
@@ -593,6 +594,140 @@ func TestTargetTimePtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *time.Time:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetMathBigFloatPtr(t *testing.T) {
+
+	negativeMax             := big.NewFloat( float64(-math.MaxFloat64) )
+	negativeOne             := big.NewFloat( float64(-1.0) )
+	negativeSmallestNonzero := big.NewFloat( float64(-math.SmallestNonzeroFloat64) )
+	zero                    := big.NewFloat( float64(0.0) )
+	smallestNonzero         := big.NewFloat( float64(math.SmallestNonzeroFloat64) )
+	one                     := big.NewFloat( float64(1.0) )
+	max                     := big.NewFloat( float64(math.MaxFloat64) )
+
+	tests := []struct{
+		Value *big.Float
+	}{
+		{
+			Value: nil,
+		},
+		{
+			Value: negativeMax,
+		},
+		{
+			Value: negativeOne,
+		},
+		{
+			Value: negativeSmallestNonzero,
+		},
+		{
+			Value: zero,
+		},
+		{
+			Value: smallestNonzero,
+		},
+		{
+			Value: one,
+		},
+		{
+			Value: max,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case *big.Float:
+			if expected, actual := test.Value, casted; expected != actual {
+				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+				continue
+			}
+		}
+	}
+}
+
+func TestTargetMathBigRatPtr(t *testing.T) {
+
+	negativeTwo22           := big.NewRat(-2, 22)
+	negativeOne             := big.NewRat(-1, 1)
+	negativeOneHalf         := big.NewRat(1, 2)
+	zero                    := big.NewRat(0, 1)
+	oneHalf                 := big.NewRat(1, 2)
+	one                     := big.NewRat(1, 1)
+	two22                   := big.NewRat(2, 22)
+
+	tests := []struct{
+		Value *big.Rat
+	}{
+		{
+			Value: nil,
+		},
+		{
+			Value: negativeTwo22,
+		},
+		{
+			Value: negativeOne,
+		},
+		{
+			Value: negativeOneHalf,
+		},
+		{
+			Value: zero,
+		},
+		{
+			Value: oneHalf,
+		},
+		{
+			Value: one,
+		},
+		{
+			Value: two22,
+		},
+	}
+
+
+	for testNumber, test := range tests {
+
+		var x target
+
+		if err := x.Scan(test.Value); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+
+		i, err := x.Interface()
+		if nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one: (%T) %v", testNumber, err, err)
+			continue
+		}
+		switch casted := i.(type) {
+		default:
+			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
+			continue
+		case *big.Rat:
 			if expected, actual := test.Value, casted; expected != actual {
 				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
 				continue

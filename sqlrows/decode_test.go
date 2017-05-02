@@ -1,6 +1,7 @@
 package itersqlrows
 
 import (
+	"math/big"
 	"time"
 
 	"testing"
@@ -90,6 +91,9 @@ func TestDecode(t *testing.T) {
 			"my_string_from_byte_slice",
 			"my_string_ptr_from_byte_slice",
 			"my_string_ptr_from_byte_slice_nil",
+
+			"my_math_big_rat_ptr",
+			"my_math_big_float_ptr",
 		},
 		ColumnsErr:    nil,
 		ScanValues:  []interface{}{
@@ -167,6 +171,9 @@ func TestDecode(t *testing.T) {
 			[]byte("ONE"),                      // my_string_from_byte_slice
 			[]byte("two THREE"),                // my_string_ptr_from_byte_slice
 			nil,                                // my_string_ptr_from_byte_slice_nil
+
+			"3.14159265358979323846264338327950", // "my_math_big_rat_ptr"
+			"3.14159265358979323846264338327950", // "my_math_big_float_ptr"
 		},
 	}
 
@@ -245,6 +252,8 @@ func TestDecode(t *testing.T) {
 		MyStringPtrFromByteSlice    *string `iter:"my_string_ptr_from_byte_slice"`
 		MyStringPtrFromByteSliceNil *string `iter:"my_string_ptr_from_byte_slice_nil"`
 
+		MyMathBigRatPtr   *big.Rat   `iter:"my_math_big_rat_ptr"`
+		MyMathBigFloatPtr *big.Float `iter:"my_math_big_float_ptr"`
 	}
 
 	var myStruct MyStruct
@@ -549,6 +558,17 @@ func TestDecode(t *testing.T) {
 		return
 	}
 	if expected, actual := (*string)(nil), myStruct.MyStringPtrFromByteSliceNil; expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+
+
+
+	if expected, actual := "6283185307179586476925286766559/2000000000000000000000000000000", myStruct.MyMathBigRatPtr.String(); expected != actual {
+		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
+		return
+	}
+	if expected, actual := "3.141592654", myStruct.MyMathBigFloatPtr.Text('g', 10); expected != actual {
 		t.Errorf("Expected (%T) ⟨%v⟩, but actually got (%T) ⟨%v⟩.", expected, expected, actual, actual)
 		return
 	}

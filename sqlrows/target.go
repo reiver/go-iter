@@ -2,6 +2,7 @@ package itersqlrows
 
 import (
 	"fmt"
+	"math/big"
 	"time"
 )
 
@@ -23,6 +24,10 @@ const (
 	targetTypeInt32Ptr   = "*int32"
 	targetTypeInt64      =  "int64"
 	targetTypeInt64Ptr   = "*int64"
+
+	targetTypeMathBigFloatPtr = "*math/big.Float"
+	targetTypeMathBigRatPtr = "*math/big.Rat"
+
 	targetTypeNil        = "nil"
 	targetTypeString     =  "string"
 	targetTypeStringPtr  = "*string"
@@ -65,6 +70,8 @@ type target struct {
 	int32PtrValue   *int32
 	int64Value       int64
 	int64PtrValue   *int64
+	mathBigFloatPtrValue *big.Float
+	mathBigRatPtrValue   *big.Rat
 	nilValue         interface{}
 	stringValue      string
 	stringPtrValue  *string
@@ -121,6 +128,10 @@ func (receiver target) Interface() (interface{}, error) {
 		return receiver.int64Value, nil
 	case targetTypeInt64Ptr:
 		return receiver.int64PtrValue, nil
+	case targetTypeMathBigFloatPtr:
+		return receiver.mathBigFloatPtrValue, nil
+	case targetTypeMathBigRatPtr:
+		return receiver.mathBigRatPtrValue, nil
 	case targetTypeNil:
 		return receiver.nilValue, nil
 	case targetTypeString:
@@ -162,6 +173,15 @@ func (receiver *target) Scan(src interface{}) error {
 	}
 
 	switch t := src.(type) {
+
+	case *big.Float:
+		receiver.typ = targetTypeMathBigFloatPtr
+		receiver.mathBigFloatPtrValue = t
+		return nil
+	case *big.Rat:
+		receiver.typ = targetTypeMathBigRatPtr
+		receiver.mathBigRatPtrValue = t
+		return nil
 	case bool:
 		receiver.typ = targetTypeBool
 		receiver.boolValue = t
@@ -336,6 +356,10 @@ func (receiver *target) String() string {
 		return fmt.Sprintf("%v", receiver.int64Value)
 	case targetTypeInt64Ptr:
 		return fmt.Sprintf("%v", receiver.int64PtrValue)
+	case targetTypeMathBigFloatPtr:
+		return fmt.Sprintf("%v", receiver.mathBigFloatPtrValue)
+	case targetTypeMathBigRatPtr:
+		return fmt.Sprintf("%v", receiver.mathBigRatPtrValue)
 	case targetTypeNil:
 		return fmt.Sprintf("%v", receiver.nilValue)
 	case targetTypeString:
