@@ -47,9 +47,20 @@ func TestTargetBoolPtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *bool:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -114,9 +125,20 @@ func TestTargetFloat32Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *float32:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -181,9 +203,20 @@ func TestTargetFloat64Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *float64:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -240,9 +273,20 @@ func TestTargetIntPtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *int:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -299,9 +343,20 @@ func TestTargetInt8Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *int8:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -358,9 +413,20 @@ func TestTargetInt16Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *int16:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -417,9 +483,20 @@ func TestTargetInt32Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *int32:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -476,9 +553,20 @@ func TestTargetInt64Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *int64:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -535,9 +623,20 @@ func TestTargetStringPtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *string:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -594,9 +693,20 @@ func TestTargetTimePtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *time.Time:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; !expected.Equal(actual) {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -661,9 +771,20 @@ func TestTargetMathBigFloatPtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *big.Float:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := test.Value, casted; 0 != expected.Cmp(actual) {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -728,9 +849,20 @@ func TestTargetMathBigRatPtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *big.Rat:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := test.Value, casted; 0 != expected.Cmp(actual) {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -779,9 +911,20 @@ func TestTargetUintPtr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *uint:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -830,9 +973,20 @@ func TestTargetUint8Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *uint8:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -881,9 +1035,20 @@ func TestTargetUint16Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *uint16:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -932,9 +1097,20 @@ func TestTargetUint32Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *uint32:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}
@@ -983,9 +1159,20 @@ func TestTargetUint64Ptr(t *testing.T) {
 			t.Errorf("For test #%d, unexpected type: %T", testNumber, i)
 			continue
 		case *uint64:
-			if expected, actual := test.Value, casted; expected != actual {
-				t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
-				continue
+			if nil != casted {
+				if expected, actual := test.Value, casted; expected == actual {
+					t.Errorf("For test #%d, did not expect %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+				if expected, actual := *test.Value, *casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
+			} else {
+				if expected, actual := test.Value, casted; expected != actual {
+					t.Errorf("For test #%d, expected %v, but actually got %v.", testNumber, expected, actual)
+					continue
+				}
 			}
 		}
 	}

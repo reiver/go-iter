@@ -176,11 +176,19 @@ func (receiver *target) Scan(src interface{}) error {
 
 	case *big.Float:
 		receiver.typ = targetTypeMathBigFloatPtr
-		receiver.mathBigFloatPtrValue = t
+		receiver.mathBigFloatPtrValue = nil
+		if nil != t {
+			receiver.mathBigFloatPtrValue = new(big.Float)
+			receiver.mathBigFloatPtrValue.Copy(t)
+		}
 		return nil
 	case *big.Rat:
 		receiver.typ = targetTypeMathBigRatPtr
-		receiver.mathBigRatPtrValue = t
+		receiver.mathBigRatPtrValue = nil
+		if nil != t {
+			receiver.mathBigRatPtrValue = new(big.Rat)
+			receiver.mathBigRatPtrValue.Set(t)
+		}
 		return nil
 	case bool:
 		receiver.typ = targetTypeBool
@@ -188,11 +196,15 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *bool:
 		receiver.typ = targetTypeBoolPtr
-		receiver.boolPtrValue = t
+		receiver.boolPtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.boolPtrValue = &value
+		}
 		return nil
 	case []byte:
 		receiver.typ = targetTypeBytes
-		receiver.bytesValue = t
+		receiver.bytesValue = append([]byte(nil), t...)
 		return nil
 	case float32:
 		receiver.typ = targetTypeFloat32
@@ -200,7 +212,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *float32:
 		receiver.typ = targetTypeFloat32Ptr
-		receiver.float32PtrValue = t
+		receiver.float32PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.float32PtrValue = &value
+		}
 		return nil
 	case float64:
 		receiver.typ = targetTypeFloat64
@@ -208,7 +224,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *float64:
 		receiver.typ = targetTypeFloat64Ptr
-		receiver.float64PtrValue = t
+		receiver.float64PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.float64PtrValue = &value
+		}
 		return nil
 	case int:
 		receiver.typ = targetTypeInt
@@ -216,7 +236,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *int:
 		receiver.typ = targetTypeIntPtr
-		receiver.intPtrValue = t
+		receiver.intPtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.intPtrValue = &value
+		}
 		return nil
 	case int8:
 		receiver.typ = targetTypeInt8
@@ -224,7 +248,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *int8:
 		receiver.typ = targetTypeInt8Ptr
-		receiver.int8PtrValue = t
+		receiver.int8PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.int8PtrValue = &value
+		}
 		return nil
 	case int16:
 		receiver.typ = targetTypeInt16
@@ -232,7 +260,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *int16:
 		receiver.typ = targetTypeInt16Ptr
-		receiver.int16PtrValue = t
+		receiver.int16PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.int16PtrValue = &value
+		}
 		return nil
 	case int32:
 		receiver.typ = targetTypeInt32
@@ -240,7 +272,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *int32:
 		receiver.typ = targetTypeInt32Ptr
-		receiver.int32PtrValue = t
+		receiver.int32PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.int32PtrValue = &value
+		}
 		return nil
 	case int64:
 		receiver.typ = targetTypeInt64
@@ -248,7 +284,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *int64:
 		receiver.typ = targetTypeInt64Ptr
-		receiver.int64PtrValue = t
+		receiver.int64PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.int64PtrValue = &value
+		}
 		return nil
 	case string:
 		receiver.typ = targetTypeString
@@ -256,7 +296,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *string:
 		receiver.typ = targetTypeStringPtr
-		receiver.stringPtrValue = t
+		receiver.stringPtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.stringPtrValue = &value
+		}
 		return nil
 	case time.Time:
 		receiver.typ = targetTypeTime
@@ -264,7 +308,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *time.Time:
 		receiver.typ = targetTypeTimePtr
-		receiver.timePtrValue = t
+		receiver.timePtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.timePtrValue = &value
+		}
 		return nil
 	case uint:
 		receiver.typ = targetTypeUint
@@ -272,7 +320,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *uint:
 		receiver.typ = targetTypeUintPtr
-		receiver.uintPtrValue = t
+		receiver.uintPtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.uintPtrValue = &value
+		}
 		return nil
 	case uint8:
 		receiver.typ = targetTypeUint8
@@ -280,7 +332,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *uint8:
 		receiver.typ = targetTypeUint8Ptr
-		receiver.uint8PtrValue = t
+		receiver.uint8PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.uint8PtrValue = &value
+		}
 		return nil
 	case uint16:
 		receiver.typ = targetTypeUint16
@@ -288,7 +344,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *uint16:
 		receiver.typ = targetTypeUint16Ptr
-		receiver.uint16PtrValue = t
+		receiver.uint16PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.uint16PtrValue = &value
+		}
 		return nil
 	case uint32:
 		receiver.typ = targetTypeUint32
@@ -296,7 +356,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *uint32:
 		receiver.typ = targetTypeUint32Ptr
-		receiver.uint32PtrValue = t
+		receiver.uint32PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.uint32PtrValue = &value
+		}
 		return nil
 	case uint64:
 		receiver.typ = targetTypeUint64
@@ -304,7 +368,11 @@ func (receiver *target) Scan(src interface{}) error {
 		return nil
 	case *uint64:
 		receiver.typ = targetTypeUint64Ptr
-		receiver.uint64PtrValue = t
+		receiver.uint64PtrValue = nil
+		if nil != t {
+			value := *t
+			receiver.uint64PtrValue = &value
+		}
 		return nil
 	default:
 		if nil == t {
