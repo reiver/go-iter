@@ -1,15 +1,15 @@
 package iter
 
 import (
-	"errors"
+	"github.com/reiver/go-erorr"
 )
 
 var (
-	errClosed            = errors.New("Closed")
+	errClosed            = erorr.Error("Closed")
 	errEmptyIterator     = internalEmptyIteratorComplainer{}
-	errInternalError     = errors.New("Internal Error")
-	errNilIterator       = errors.New("Nil Iterator")
-	errNilReceiver       = errors.New("Nil Receiver")
-	errNotFunc           = errors.New("Not Func")
-	errTooManyIterations = errors.New("Too Many Iterations")
+	errInternalError     = erorr.Error("Internal Error")
+	errNilIterator       = erorr.Error("Nil Iterator")
+	errNilReceiver       = erorr.Error("Nil Receiver")
+	errNotFunc           = erorr.Error("Not Func")
+	errTooManyIterations = erorr.Error("Too Many Iterations")
 )
