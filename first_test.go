@@ -8,43 +8,60 @@ import (
 
 func TestFirst(t *testing.T) {
 
-	const expectedValue = "apple"
-
-	iterator := &iterstring.Slice{
-		Slice: []string{
-			expectedValue,
+	tests := []struct{
+		Iterator Iterator
+		Expected string
+	}{
+		{
+			Iterator: &iterstring.Slice{
+				Slice:[]string{
+					"apple",
+				},
+			},
+			Expected: "apple",
+		},
+		{
+			Iterator: &iterstring.Slice{
+				Slice:[]string{
+					"apple",
+					"banana",
+				},
+			},
+			Expected: "apple",
+		},
+		{
+			Iterator: &iterstring.Slice{
+				Slice:[]string{
+					"apple",
+					"banana",
+					"cherry",
+				},
+			},
+			Expected: "apple",
 		},
 	}
 
-	var datum string
+	for testNumber, test := range tests {
 
-	if err := (First{iterator}).Decode(&datum); nil != err {
-		t.Errorf("Did not expect an error, but actually got one: (%T) %v", err, err)
-		return
-	}
-	if expected, actual := expectedValue, datum; expected != actual {
-		t.Errorf("Expected %q, but actually got %q.", expected, actual)
-		return
-	}
-}
+		var actual string
 
-func TestFirstFailTooMany(t *testing.T) {
+		if err := (First{test.Iterator}).Decode(&actual); nil != err {
+			t.Errorf("For test #%d, did not expect an error, but actually got one.", testNumber)
+			t.Logf("ERROR: (%T) %s", err, err)
+			continue
+		}
 
-	iterator := &iterstring.Slice{
-		Slice: []string{
-			"apple",
-			"banana",
-		},
-	}
+		{
+			expected := test.Expected
+			if expected != actual {
+				t.Errorf("For test #%d, the actual first value is not what was expected.", testNumber)
+				t.Logf("EXPECTED: %q", expected)
+				t.Logf("ACTUAL:   %q", actual)
+				continue
+			}
+		}
 
-	var datum string
 
-	if err := (First{iterator}).Decode(&datum); nil == err {
-		t.Errorf("Expect an error, but actually did not get one: %v", err)
-		return
-	} else if expected, actual := errTooManyIterations, err; expected != actual {
-		t.Errorf("Expected (%T) %v, but actually got (%T) %v.", expected, expected, actual, actual)
-		return
 	}
 }
 
