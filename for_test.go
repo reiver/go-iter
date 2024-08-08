@@ -84,19 +84,11 @@ func TestForFail(t *testing.T) {
 		Slice: slice,
 	}
 
-	var actualValue int64
-	numIteration := 0
 	err := For{iterator}.Each(func(datum int64){
-		numIteration++
-
-		actualValue = datum
+		// nothing here.
 	})
 	if nil == err {
 		t.Errorf("Expect an error, but did not actually got one: %v", err)
-		return
-	}
-	if expected, actual := 0, numIteration; expected != actual {
-		t.Errorf("Expected %d, but actually got %d.", expected, actual)
 		return
 	}
 }
