@@ -26,7 +26,7 @@ func (receiver internalEmptyIterator) Close() error {
 	return nil
 }
 
-func (receiver internalEmptyIterator) Decode(interface{}) error {
+func (receiver internalEmptyIterator) Decode(any) error {
 	return errClosed
 }
 

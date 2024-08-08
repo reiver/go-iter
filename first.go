@@ -22,11 +22,11 @@ type First struct {
 	Iterator Iterator
 }
 
-func (receiver First) Decode(v interface{}) error {
+func (receiver First) Decode(v any) error {
 	return receiver.decode(v)
 }
 
-func (receiver First) decode(v interface{}) (err error) {
+func (receiver First) decode(v any) (err error) {
 
 	iterator := receiver.Iterator
 	if nil == iterator {

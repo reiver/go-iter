@@ -34,7 +34,7 @@ package iter
 //	}
 type Iterator interface {
 	Close() error
-	Decode(interface{}) error
+	Decode(any) error
 	Err() error
 	Next() bool
 }

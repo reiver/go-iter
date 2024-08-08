@@ -34,11 +34,11 @@ type For struct {
 	Iterator Iterator
 }
 
-func (receiver For) Each(fn interface{}) error {
+func (receiver For) Each(fn any) error {
 	return receiver.each(fn)
 }
 
-func (receiver For) each(fn interface{}) (err error) {
+func (receiver For) each(fn any) (err error) {
 
 	iterator := receiver.Iterator
 	if nil == iterator {
