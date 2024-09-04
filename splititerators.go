@@ -1,14 +1,14 @@
 package iter
 
-type SplitIterator[T any] struct {
+type SplitIterators[T any] struct {
 	Iterator Iterator
 	Func func(T) (Iterator, error)
 	closed bool
 }
 
-var _ Iterators = &SplitIterator[string]{}
+var _ Iterators = &SplitIterators[string]{}
 
-func (receiver *SplitIterator[T]) Close() error {
+func (receiver *SplitIterators[T]) Close() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -30,7 +30,7 @@ func (receiver *SplitIterator[T]) Close() error {
 	return nil
 }
 
-func (receiver *SplitIterator[T]) NextIterator() (Iterator, error) {
+func (receiver *SplitIterators[T]) NextIterator() (Iterator, error) {
 	if nil == receiver {
 		return nil, errNilReceiver
 	}

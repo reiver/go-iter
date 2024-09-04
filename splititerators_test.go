@@ -9,7 +9,7 @@ import (
 	"github.com/reiver/go-iter"
 )
 
-func TestSplitIterator_string(t *testing.T) {
+func TestSplitIterators_string(t *testing.T) {
 
 	tests := []struct{
 		Strings []string
@@ -77,7 +77,7 @@ func TestSplitIterator_string(t *testing.T) {
 
 		var innerIterator iter.Iterator = &iter.Slice[string]{Slice: test.Strings}
 
-		var iterators iter.Iterators = &iter.SplitIterator[string]{
+		var iterators iter.Iterators = &iter.SplitIterators[string]{
 			Iterator: innerIterator,
 			Func: fn,
 		}
