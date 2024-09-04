@@ -81,11 +81,9 @@ func (receiver *FlattenedIterator) Err() error {
 	var err1 error
 	{
 		var iterator Iterator = receiver.iterator
-		if nil == iterator {
-			return errNilIterator
+		if nil != iterator {
+			err1 = iterator.Err()
 		}
-
-		err1 = iterator.Err()
 	}
 
 	var err2 error
