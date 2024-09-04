@@ -5,13 +5,13 @@ import (
 )
 
 var (
-	errClosed            = erorr.Error("Closed")
+	errClosed            = erorr.Error("iter: closed")
 	errDone              = erorr.Error("iter: done")
 	errEmptyIterator     = internalEmptyIteratorComplainer{}
-	errInternalError     = erorr.Error("Internal Error")
-	errNilIterator       = erorr.Error("Nil Iterator")
+	errInternalError     = erorr.Error("iter: internal error")
+	errNilIterator       = erorr.Error("iter: nil iterator")
 	errNilIterators      = erorr.Error("iter: nil iterators")
-	errNilReceiver       = erorr.Error("Nil Receiver")
-	errNotFunc           = erorr.Error("Not Func")
-	errTooManyIterations = erorr.Error("Too Many Iterations")
+	errNilReceiver       = erorr.Error("iter: nil receiver")
+	errNotFunc           = erorr.Error("iter: not func")
+	errTooManyIterations = erorr.Error("iter: too many iterations")
 )
