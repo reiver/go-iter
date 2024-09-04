@@ -37,4 +37,3 @@ func (receiver internalEmptyIterator) Err() error {
 func (receiver internalEmptyIterator) Next() bool {
 	return false
 }
-
