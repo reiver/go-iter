@@ -41,7 +41,7 @@ func (receiver *SplitIterators[T]) NextIterator() (Iterator, error) {
 
 	var iterator Iterator = receiver.Iterator
 	if nil == iterator {
-		return nil, errNilIterator
+		return nil, errNilIteratorInsideSplitIterators
 	}
 
 	var function func(T)(Iterator,error) = receiver.Func

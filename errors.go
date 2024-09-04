@@ -10,6 +10,7 @@ var (
 	errEmptyIterator     = internalEmptyIteratorComplainer{}
 	errInternalError     = erorr.Error("iter: internal error")
 	errNilFunc           = erorr.Error("iter: nil func")
+	errNilIteratorInsideSplitIterators = erorr.Error("iter: nil iterator inside iter.SplitIterators")
 	errNilIterator       = erorr.Error("iter: nil iterator")
 	errNilIterators      = erorr.Error("iter: nil iterators")
 	errNilReceiver       = erorr.Error("iter: nil receiver")
