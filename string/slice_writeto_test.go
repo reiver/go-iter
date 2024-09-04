@@ -110,7 +110,7 @@ func TestSliceWriteTo(t *testing.T) {
 				continue
 			}
 			if expected, actual := test.Slice[iterationNumber], buffer2.String(); expected != actual {
-				t.Errorf("For test #%d and iteration number #%d, expected %d (%q), but actually got %d (%q).", testNumber, iterationNumber, expected, expected, actual, actual)
+				t.Errorf("For test #%d and iteration number #%d, expected %s (%q), but actually got %s (%q).", testNumber, iterationNumber, expected, expected, actual, actual)
 				continue
 			}
 		}
