@@ -1,10 +1,11 @@
 package itertime
 
 import (
-	"fmt"
+	"testing"
+
 	"time"
 
-	"testing"
+	"github.com/reiver/go-iter/internal/testing"
 )
 
 func TestTimeScanIntoTime(t *testing.T) {
@@ -151,7 +152,7 @@ func TestTimeScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum timeTestScanner
+			var datum internaltesting.TestScanner[time.Time]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -169,34 +170,4 @@ func TestTimeScanIntoScanner(t *testing.T) {
 			}
 		}
 	}
-}
-
-type timeTestScanner struct {
-	value time.Time
-	scanned bool
-}
-
-func (receiver timeTestScanner) Scanned() bool {
-	return receiver.scanned
-}
-
-func (receiver timeTestScanner) Value() time.Time {
-	return receiver.value
-}
-
-func (receiver *timeTestScanner) Scan(src interface{}) error {
-	if nil == src {
-		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
-	}
-
-	b, ok := src.(time.Time)
-	if !ok {
-		return fmt.Errorf("Could not convert %T into time.Time.", src)
-	}
-
-	receiver.value   = b
-	receiver.scanned = true
-
-
-	return nil
 }

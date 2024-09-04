@@ -1,9 +1,9 @@
 package iterfloat32
 
 import (
-	"fmt"
-
 	"testing"
+
+	"github.com/reiver/go-iter/internal/testing"
 )
 
 func TestSliceScanIntoFloat32(t *testing.T) {
@@ -150,7 +150,7 @@ func TestSliceScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum float32TestScanner
+			var datum internaltesting.TestScanner[float32]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -162,40 +162,10 @@ func TestSliceScanIntoScanner(t *testing.T) {
 				continue
 			}
 
-			if expected, actual := float64(test.Slice[iterationNumber]), datum.Value(); expected != actual {
+			if expected, actual := float32(test.Slice[iterationNumber]), datum.Value(); expected != actual {
 				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
 				continue
 			}
 		}
 	}
-}
-
-type float32TestScanner struct {
-	value float64
-	scanned bool
-}
-
-func (receiver float32TestScanner) Scanned() bool {
-	return receiver.scanned
-}
-
-func (receiver float32TestScanner) Value() float64 {
-	return receiver.value
-}
-
-func (receiver *float32TestScanner) Scan(src interface{}) error {
-	if nil == src {
-		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
-	}
-
-	b, ok := src.(float64)
-	if !ok {
-		return fmt.Errorf("Could not convert %T into float64.", src)
-	}
-
-	receiver.value   = b
-	receiver.scanned = true
-
-
-	return nil
 }

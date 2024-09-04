@@ -1,9 +1,9 @@
 package iteruint8
 
 import (
-	"fmt"
-
 	"testing"
+
+	"github.com/reiver/go-iter/internal/testing"
 )
 
 func TestSliceScanIntoInt16(t *testing.T) {
@@ -456,7 +456,7 @@ func TestSliceScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum uint8TestScanner
+			var datum internaltesting.TestScanner[uint8]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -468,40 +468,10 @@ func TestSliceScanIntoScanner(t *testing.T) {
 				continue
 			}
 
-			if expected, actual := int64(test.Slice[iterationNumber]), datum.Value(); expected != actual {
+			if expected, actual := uint8(test.Slice[iterationNumber]), datum.Value(); expected != actual {
 				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
 				continue
 			}
 		}
 	}
-}
-
-type uint8TestScanner struct {
-	value int64
-	scanned bool
-}
-
-func (receiver uint8TestScanner) Scanned() bool {
-	return receiver.scanned
-}
-
-func (receiver uint8TestScanner) Value() int64 {
-	return receiver.value
-}
-
-func (receiver *uint8TestScanner) Scan(src interface{}) error {
-	if nil == src {
-		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
-	}
-
-	b, ok := src.(int64)
-	if !ok {
-		return fmt.Errorf("Could not convert %T into int64.", src)
-	}
-
-	receiver.value   = b
-	receiver.scanned = true
-
-
-	return nil
 }

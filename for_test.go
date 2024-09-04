@@ -1,9 +1,9 @@
-package iter
+package iter_test
 
 import (
-	"github.com/reiver/go-iter/string"
-
 	"testing"
+
+	"github.com/reiver/go-iter"
 )
 
 func TestForSingle(t *testing.T) {
@@ -13,13 +13,13 @@ func TestForSingle(t *testing.T) {
 		expectedValue,
 	}
 
-	iterator := &iterstring.Slice{
+	iterator := &iter.Slice[string]{
 		Slice: slice,
 	}
 
 	var actualValue string
 	numIteration := 0
-	err := For{iterator}.Each(func(datum string){
+	err := iter.For{iterator}.Each(func(datum string){
 		numIteration++
 
 		actualValue = datum
@@ -47,12 +47,12 @@ func TestForMany(t *testing.T) {
 		"Date",
 	}
 
-	iterator := &iterstring.Slice{
+	iterator := &iter.Slice[string]{
 		Slice: slice,
 	}
 
 	var actualValues []string
-	err := For{iterator}.Each(func(datum string){
+	err := iter.For{iterator}.Each(func(datum string){
 		actualValues = append(actualValues, datum)
 	})
 	if nil != err {
@@ -80,11 +80,11 @@ func TestForFail(t *testing.T) {
 		expectedValue,
 	}
 
-	iterator := &iterstring.Slice{
+	iterator := &iter.Slice[string]{
 		Slice: slice,
 	}
 
-	err := For{iterator}.Each(func(datum int64){
+	err := iter.For{iterator}.Each(func(datum int64){
 		// nothing here.
 	})
 	if nil == err {

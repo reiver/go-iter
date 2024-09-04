@@ -1,9 +1,9 @@
 package iterint64
 
 import (
-	"fmt"
-
 	"testing"
+
+	"github.com/reiver/go-iter/internal/testing"
 )
 
 func TestSliceScanIntoInt64(t *testing.T) {
@@ -150,7 +150,7 @@ func TestSliceScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum int64TestScanner
+			var datum internaltesting.TestScanner[int64]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -168,34 +168,4 @@ func TestSliceScanIntoScanner(t *testing.T) {
 			}
 		}
 	}
-}
-
-type int64TestScanner struct {
-	value int64
-	scanned bool
-}
-
-func (receiver int64TestScanner) Scanned() bool {
-	return receiver.scanned
-}
-
-func (receiver int64TestScanner) Value() int64 {
-	return receiver.value
-}
-
-func (receiver *int64TestScanner) Scan(src interface{}) error {
-	if nil == src {
-		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
-	}
-
-	b, ok := src.(int64)
-	if !ok {
-		return fmt.Errorf("Could not convert %T into int64.", src)
-	}
-
-	receiver.value   = b
-	receiver.scanned = true
-
-
-	return nil
 }

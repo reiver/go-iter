@@ -22,7 +22,7 @@ type EmptyIteratorComplainer interface {
 type internalEmptyIteratorComplainer struct{}
 
 func (receiver internalEmptyIteratorComplainer) Error() string {
-	return "Empty Iterator"
+	return "iter: empty iterator"
 }
 
 func (receiver internalEmptyIteratorComplainer) EmptyIteratorComplainer() {

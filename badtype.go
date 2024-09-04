@@ -1,4 +1,4 @@
-package iterbool
+package iter
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ type internalBadTypeComplainer struct{
 }
 
 func (receiver internalBadTypeComplainer) Error() string {
-	return fmt.Sprintf("Bad Type: %q", receiver.actualType)
+	return fmt.Sprintf("iter: bad type: %q", receiver.actualType)
 }
 
 func (internalBadTypeComplainer) BadTypeComplainer() {

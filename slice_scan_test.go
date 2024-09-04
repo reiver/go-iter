@@ -1,22 +1,23 @@
-package iterbool
+package iter_test
 
 import (
 	"testing"
 
+	"github.com/reiver/go-iter"
 	"github.com/reiver/go-iter/internal/testing"
 )
 
-func TestSliceScanIntoBool(t *testing.T) {
+func TestSlice_Scan_intoString(t *testing.T) {
 
 	tests := []struct{
-		Slice []bool
+		Slice []string
 	}{}
 
-	for _, slice := range boolTestSlices {
-		sliceCopy := append([]bool(nil), slice...)
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
 
 		test := struct{
-			Slice []bool
+			Slice []string
 		}{
 			Slice: sliceCopy,
 		}
@@ -27,9 +28,9 @@ func TestSliceScanIntoBool(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		slice := append([]bool(nil), test.Slice...)
+		slice := append([]string(nil), test.Slice...)
 
-		iterator := Slice{
+		iterator := iter.Slice[string]{
 			Slice: slice,
 		}
 
@@ -42,7 +43,7 @@ func TestSliceScanIntoBool(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum bool
+			var datum string
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -57,17 +58,17 @@ func TestSliceScanIntoBool(t *testing.T) {
 	}
 }
 
-func TestSliceScanIntoInterface(t *testing.T) {
+func TestSlice_Scan_intoInterface(t *testing.T) {
 
 	tests := []struct{
-		Slice []bool
+		Slice []string
 	}{}
 
-	for _, slice := range boolTestSlices {
-		sliceCopy := append([]bool(nil), slice...)
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
 
 		test := struct{
-			Slice []bool
+			Slice []string
 		}{
 			Slice: sliceCopy,
 		}
@@ -78,9 +79,9 @@ func TestSliceScanIntoInterface(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		slice := append([]bool(nil), test.Slice...)
+		slice := append([]string(nil), test.Slice...)
 
-		iterator := Slice{
+		iterator := iter.Slice[string]{
 			Slice: slice,
 		}
 
@@ -100,7 +101,7 @@ func TestSliceScanIntoInterface(t *testing.T) {
 				continue
 			}
 
-			datum, ok := x.(bool)
+			datum, ok := x.(string)
 			if !ok {
 				t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually couldn't.", testNumber, iterationNumber)
 				continue
@@ -114,17 +115,17 @@ func TestSliceScanIntoInterface(t *testing.T) {
 	}
 }
 
-func TestSliceScanIntoScanner(t *testing.T) {
+func TestSlice_Scan_intoScanner(t *testing.T) {
 
 	tests := []struct{
-		Slice []bool
+		Slice []string
 	}{}
 
-	for _, slice := range boolTestSlices {
-		sliceCopy := append([]bool(nil), slice...)
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
 
 		test := struct{
-			Slice []bool
+			Slice []string
 		}{
 			Slice: sliceCopy,
 		}
@@ -135,9 +136,9 @@ func TestSliceScanIntoScanner(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		slice := append([]bool(nil), test.Slice...)
+		slice := append([]string(nil), test.Slice...)
 
-		iterator := Slice{
+		iterator := iter.Slice[string]{
 			Slice: slice,
 		}
 
@@ -150,7 +151,7 @@ func TestSliceScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum internaltesting.TestScanner[bool]
+			var datum internaltesting.TestScanner[string]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)

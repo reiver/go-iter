@@ -1,10 +1,10 @@
-package itertime
+package iter
 
 import (
 	"fmt"
 )
 
-func (receiver *Slice) Scan(dest ...interface{}) error {
+func (receiver *Slice[T]) Scan(dest ...interface{}) error {
 	if nil == receiver {
 		return errNilReceiver
 	}

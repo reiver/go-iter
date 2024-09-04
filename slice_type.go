@@ -1,9 +1,9 @@
-package iterstring
+package iter
 
 import (
 	"reflect"
 )
 
-func (receiver *Slice) Type() reflect.Type {
+func (receiver *Slice[T]) Type() reflect.Type {
 	return reflect.TypeOf((*string)(nil)).Elem()
 }

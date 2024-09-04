@@ -184,8 +184,8 @@ func TestSliceErrNilReceiver(t *testing.T) {
 			t.Errorf("Expected an error, but did not actually get one: %v", err)
 			return
 		}
-		if expected, actual := errNilReceiver, err; expected != actual {
-			t.Errorf("Expected an (%T) %q, but actually got (%T) %q.", expected, expected, actual, actual)
+		if expected, actual := "iter: nil receiver", err.Error(); expected != actual {
+			t.Errorf("Expected error %q, but actually got error %q.", expected, actual)
 			return
 		}
 	}
@@ -198,8 +198,8 @@ func TestSliceErrNilReceiver(t *testing.T) {
 			t.Errorf("Expected an error, but did not actually get one: %v", err)
 			return
 		}
-		if expected, actual := errNilReceiver, err; expected != actual {
-			t.Errorf("Expected an (%T) %q, but actually got (%T) %q.", expected, expected, actual, actual)
+		if expected, actual := "iter: nil receiver", err.Error(); expected != actual {
+			t.Errorf("Expected error %q, but actually got error %q.", expected, actual)
 			return
 		}
 	}
@@ -210,8 +210,8 @@ func TestSliceErrNilReceiver(t *testing.T) {
 			t.Errorf("Expected an error, but did not actually get one: %v", err)
 			return
 		}
-		if expected, actual := errNilReceiver, err; expected != actual {
-			t.Errorf("Expected an (%T) %q, but actually got (%T) %q.", expected, expected, actual, actual)
+		if expected, actual := "iter: nil receiver", err.Error(); expected != actual {
+			t.Errorf("Expected error %q, but actually got error %q.", expected, actual)
 			return
 		}
 	}

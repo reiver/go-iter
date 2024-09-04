@@ -1,9 +1,9 @@
 package iterbyte
 
 import (
-	"fmt"
-
 	"testing"
+
+	"github.com/reiver/go-iter/internal/testing"
 )
 
 func TestSliceScanIntoByte(t *testing.T) {
@@ -150,7 +150,7 @@ func TestSliceScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum byteTestScanner
+			var datum internaltesting.TestScanner[byte]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -162,40 +162,10 @@ func TestSliceScanIntoScanner(t *testing.T) {
 				continue
 			}
 
-			if expected, actual := int64(test.Slice[iterationNumber]), datum.Value(); expected != actual {
+			if expected, actual := byte(test.Slice[iterationNumber]), datum.Value(); expected != actual {
 				t.Errorf("For test #%d and iteration #%d, expected %v, but actually got %v.", testNumber, iterationNumber, expected, actual)
 				continue
 			}
 		}
 	}
-}
-
-type byteTestScanner struct {
-	value int64
-	scanned bool
-}
-
-func (receiver byteTestScanner) Scanned() bool {
-	return receiver.scanned
-}
-
-func (receiver byteTestScanner) Value() int64 {
-	return receiver.value
-}
-
-func (receiver *byteTestScanner) Scan(src interface{}) error {
-	if nil == src {
-		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
-	}
-
-	b, ok := src.(int64)
-	if !ok {
-		return fmt.Errorf("Could not convert %T into int64.", src)
-	}
-
-	receiver.value   = b
-	receiver.scanned = true
-
-
-	return nil
 }

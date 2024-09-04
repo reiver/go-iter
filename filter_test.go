@@ -6,7 +6,6 @@ import (
 	"slices"
 
 	"github.com/reiver/go-iter"
-	"github.com/reiver/go-iter/string"
 )
 
 func TestFilter_string(t *testing.T) {
@@ -16,7 +15,7 @@ func TestFilter_string(t *testing.T) {
 	}{
 		{
 			Iterator: &iter.Filter[string]{
-				Iterator: &iterstring.Slice{
+				Iterator: &iter.Slice[string]{
 					Slice:[]string{
 				"a",
 				"ab",

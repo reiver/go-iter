@@ -1,9 +1,9 @@
 package iterstring
 
 import (
-	"fmt"
-
 	"testing"
+
+	"github.com/reiver/go-iter/internal/testing"
 )
 
 func TestSliceScanIntoString(t *testing.T) {
@@ -150,7 +150,7 @@ func TestSliceScanIntoScanner(t *testing.T) {
 		for iterator.Next() {
 			iterationNumber++
 
-			var datum stringTestScanner
+			var datum internaltesting.TestScanner[string]
 
 			if err := iterator.Scan(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -168,34 +168,4 @@ func TestSliceScanIntoScanner(t *testing.T) {
 			}
 		}
 	}
-}
-
-type stringTestScanner struct {
-	value string
-	scanned bool
-}
-
-func (receiver stringTestScanner) Scanned() bool {
-	return receiver.scanned
-}
-
-func (receiver stringTestScanner) Value() string {
-	return receiver.value
-}
-
-func (receiver *stringTestScanner) Scan(src interface{}) error {
-	if nil == src {
-		return fmt.Errorf("Cannot scan into nil: (%T) %v", src, src)
-	}
-
-	b, ok := src.(string)
-	if !ok {
-		return fmt.Errorf("Could not convert %T into string.", src)
-	}
-
-	receiver.value   = b
-	receiver.scanned = true
-
-
-	return nil
 }

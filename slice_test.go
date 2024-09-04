@@ -1,42 +1,44 @@
-package itercomplex128
+package iter_test
 
 import (
 	"testing"
+
+	"bytes"
+
+	"github.com/reiver/go-iter"
 )
 
 var (
-	complex128TestSlices = [][]complex128{
-		[]complex128{},
+	stringTestSlices = [][]string{
+		[]string{},
 
-		[]complex128{0},
-		[]complex128{1},
-		[]complex128{2},
-		[]complex128{3},
-		[]complex128{4},
-		[]complex128{5},
-		[]complex128{6},
-		[]complex128{7},
-		[]complex128{8},
-		[]complex128{9},
-		[]complex128{10},
+		[]string{"apple"},
+		[]string{"banana"},
+		[]string{"cherry"},
 
-		[]complex128{0,1,2,3,4,5,6,7,8,9,10},
+		[]string{"ONE"},
+		[]string{"TWO"},
+		[]string{"THREE"},
+		[]string{"FOUR"},
+		[]string{"FIVE"},
 
-		[]complex128{213,18,4},
+		[]string{"apple","banana","cherry"},
+
+		[]string{"ONE","TWO","THREE","FOUR","FIVE"},
 	}
 )
 
 func TestSlice(t *testing.T) {
 
 	tests := []struct{
-		Slice []complex128
+		Slice []string
 	}{}
 
-	for _, slice := range complex128TestSlices {
-		sliceCopy := append([]complex128(nil), slice...)
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
 
 		test := struct{
-			Slice []complex128
+			Slice []string
 		}{
 			Slice: sliceCopy,
 		}
@@ -47,9 +49,9 @@ func TestSlice(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		slice := append([]complex128(nil), test.Slice...)
+		slice := append([]string(nil), test.Slice...)
 
-		iterator := Slice{
+		iterator := iter.Slice[string]{
 			Slice: slice,
 		}
 
@@ -58,13 +60,13 @@ func TestSlice(t *testing.T) {
 			continue
 		}
 
-		var actualData []complex128
+		var actualData []string
 		iterationNumber := -1
 		for iterator.Next() {
 			iterationNumber++
 
 
-			var datum complex128
+			var datum string
 
 			if err := iterator.Decode(&datum); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
@@ -74,7 +76,7 @@ func TestSlice(t *testing.T) {
 			actualData = append(actualData, datum)
 
 
-			if err := iterator.Decode((*complex128)(nil)); nil != err {
+			if err := iterator.Decode((*string)(nil)); nil != err {
 				t.Errorf("For test #%d and iteration #%d, did not expect an error, but actually got one: (%T) %v", testNumber, iterationNumber, err, err)
 				continue
 			}
@@ -88,7 +90,7 @@ func TestSlice(t *testing.T) {
 					continue
 				}
 
-				datum2, ok := x.(complex128)
+				datum2, ok := x.(string)
 				if !ok {
 					t.Errorf("For test #%d and iteration #%d, expected to be able to cast, but actually could not. (%T)", testNumber, iterationNumber, x)
 					continue
@@ -134,14 +136,14 @@ func TestSlice(t *testing.T) {
 func TestSliceClose(t *testing.T) {
 
 	tests := []struct{
-		Slice []complex128
+		Slice []string
 	}{}
 
-	for _, slice := range complex128TestSlices {
-		sliceCopy := append([]complex128(nil), slice...)
+	for _, slice := range stringTestSlices {
+		sliceCopy := append([]string(nil), slice...)
 
 		test := struct{
-			Slice []complex128
+			Slice []string
 		}{
 			Slice: sliceCopy,
 		}
@@ -153,9 +155,9 @@ func TestSliceClose(t *testing.T) {
 	for testNumber, test := range tests {
 
 		for closeTestNumber:=0; closeTestNumber<len(test.Slice); closeTestNumber++ {
-			slice := append([]complex128(nil), test.Slice...)
+			slice := append([]string(nil), test.Slice...)
 
-			iterator := Slice{
+			iterator := iter.Slice[string]{
 				Slice: slice,
 			}
 
@@ -182,7 +184,7 @@ func TestSliceClose(t *testing.T) {
 
 func TestSliceErrNilReceiver(t *testing.T) {
 
-	iterator := (*Slice)(nil)
+	iterator := (*iter.Slice[string])(nil)
 
 	{
 		err := iterator.Close()
@@ -228,5 +230,19 @@ func TestSliceErrNilReceiver(t *testing.T) {
 			t.Errorf("Expected an %t, but actually got %t.", expected, actual)
 			return
 		}
+	}
+
+	{
+		var buffer bytes.Buffer
+
+		_, err := iterator.WriteTo(&buffer)
+		if nil == err {
+			t.Errorf("Expected an error, but did not actually get one: %v", err)
+			return
+		}
+		if expected, actual := "iter: nil receiver", err.Error(); expected != actual {
+			t.Errorf("Expected error %q, but actually got error %q.", expected, actual)
+			return
+                }
 	}
 }

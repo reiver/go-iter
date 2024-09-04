@@ -1,19 +1,19 @@
-package iter
+package iter_test
 
 import (
-	"github.com/reiver/go-iter/string"
-
 	"testing"
+
+	"github.com/reiver/go-iter"
 )
 
 func TestFirst(t *testing.T) {
 
 	tests := []struct{
-		Iterator Iterator
+		Iterator iter.Iterator
 		Expected string
 	}{
 		{
-			Iterator: &iterstring.Slice{
+			Iterator: &iter.Slice[string]{
 				Slice:[]string{
 					"apple",
 				},
@@ -21,7 +21,7 @@ func TestFirst(t *testing.T) {
 			Expected: "apple",
 		},
 		{
-			Iterator: &iterstring.Slice{
+			Iterator: &iter.Slice[string]{
 				Slice:[]string{
 					"apple",
 					"banana",
@@ -30,7 +30,7 @@ func TestFirst(t *testing.T) {
 			Expected: "apple",
 		},
 		{
-			Iterator: &iterstring.Slice{
+			Iterator: &iter.Slice[string]{
 				Slice:[]string{
 					"apple",
 					"banana",
@@ -45,7 +45,7 @@ func TestFirst(t *testing.T) {
 
 		var actual string
 
-		if err := (First{test.Iterator}).Decode(&actual); nil != err {
+		if err := (iter.First{test.Iterator}).Decode(&actual); nil != err {
 			t.Errorf("For test #%d, did not expect an error, but actually got one.", testNumber)
 			t.Logf("ERROR: (%T) %s", err, err)
 			continue
@@ -67,7 +67,7 @@ func TestFirst(t *testing.T) {
 
 func TestFirstFailTooEmpty(t *testing.T) {
 
-	iterator := &iterstring.Slice{
+	iterator := &iter.Slice[string]{
 		Slice: []string{
 			// Nothing here.
 		},
@@ -75,11 +75,11 @@ func TestFirstFailTooEmpty(t *testing.T) {
 
 	var datum string
 
-	if err := (First{iterator}).Decode(&datum); nil == err {
+	if err := (iter.First{iterator}).Decode(&datum); nil == err {
 		t.Errorf("Expect an error, but actually did not get one: %v", err)
 		return
-	} else if expected, actual := errEmptyIterator, err; expected != actual {
-		t.Errorf("Expected (%T) %v, but actually got (%T) %v.", expected, expected, actual, actual)
+	} else if expected, actual := "iter: empty iterator", err.Error(); expected != actual {
+		t.Errorf("Expected error %q, but actually got error %q.", expected, actual)
 		return
 	}
 }
