@@ -9,6 +9,7 @@ var (
 	errDone              = erorr.Error("iter: done")
 	errEmptyIterator     = internalEmptyIteratorComplainer{}
 	errInternalError     = erorr.Error("iter: internal error")
+	errNilFunc           = erorr.Error("iter: nil func")
 	errNilIterator       = erorr.Error("iter: nil iterator")
 	errNilIterators      = erorr.Error("iter: nil iterators")
 	errNilReceiver       = erorr.Error("iter: nil receiver")
