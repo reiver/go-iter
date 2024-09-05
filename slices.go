@@ -37,9 +37,16 @@ func (receiver *Slices[T]) nextSlice() ([]T, error) {
 }
 
 func (receiver *Slices[T]) NextIterator() (Iterator, error) {
+	if nil == receiver {
+		return nil, errNilReceiver
+	}
+
 	slice, err := receiver.nextSlice()
 	if nil != err {
 		return nil, err
+	}
+	if len(slice) <= 0 {
+		return nil, nil
 	}
 
 	var iterator Iterator = &Slice[T]{Slice:slice}
