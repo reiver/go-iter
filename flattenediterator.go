@@ -120,20 +120,29 @@ func (receiver *FlattenedIterator) Next() bool {
 		}
 	}
 
-	var result bool = iterator.Next()
-	if false == result {
-		if !receiver.nextIterator() {
-			return false
+
+	{
+		loop: for {
+			next := iterator.Next()
+			if next {
+				break loop
+			}
+			if err := iterator.Err(); nil != err {
+				receiver.err = err
+				return false
+			}
+
+			if !receiver.nextIterator() {
+				return false
+			}
+			iterator = receiver.iterator
+			if nil == iterator {
+				return false
+			}
 		}
-		iterator = receiver.iterator
-		if nil == iterator {
-			return false
-		}
-		result = iterator.Next()
 	}
 
-
-	return result
+	return true
 }
 
 func (receiver *FlattenedIterator) nextIterator() bool {
