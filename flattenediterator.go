@@ -55,11 +55,11 @@ func (receiver *FlattenedIterator) Decode(dst any) error {
 		return errNilReceiver
 	}
 
-	if receiver.closed {
-		return errClosed
-	}
 	if receiver.done {
 		return errDone
+	}
+	if receiver.closed {
+		return errClosed
 	}
 
 	if nil != receiver.err {
@@ -100,10 +100,10 @@ func (receiver *FlattenedIterator) Next() bool {
 		return false
 	}
 
-	if receiver.closed {
+	if receiver.done {
 		return false
 	}
-	if receiver.done {
+	if receiver.closed {
 		return false
 	}
 
