@@ -85,6 +85,8 @@ func (receiver *FlattenedIterator) Err() error {
 		if nil != iterator {
 			err1 = iterator.Err()
 		}
+
+		err1 = erorr.Errorf("iter: current iterator, inside iter.FlattenedIterator, returned an error: %w", err1)
 	}
 
 	var err2 error
