@@ -5,7 +5,6 @@ var (
 	//
 	// It is useful in cases where you want to quickly and cheaply return an empty iterator.
 	//
-	//
 	// Usage:
 	//
 	//	func fn() (iter.Iterator, error) {
@@ -27,7 +26,7 @@ func (receiver internalEmptyIterator) Close() error {
 }
 
 func (receiver internalEmptyIterator) Decode(any) error {
-	return errClosed
+	return errEmptyIteratorCannotBeDecoded
 }
 
 func (receiver internalEmptyIterator) Err() error {
@@ -37,3 +36,4 @@ func (receiver internalEmptyIterator) Err() error {
 func (receiver internalEmptyIterator) Next() bool {
 	return false
 }
+

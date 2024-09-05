@@ -8,6 +8,7 @@ var (
 	errClosed            = erorr.Error("iter: closed")
 	errDone              = erorr.Error("iter: done")
 	errEmptyIterator     = internalEmptyIteratorComplainer{}
+	errEmptyIteratorCannotBeDecoded = erorr.Error("iter: empty iterator cannot be decoded")
 	errInternalError     = erorr.Error("iter: internal error")
 	errNilFunc           = erorr.Error("iter: nil func")
 	errNilIteratorInsideSplitIterators = erorr.Error("iter: nil iterator inside iter.SplitIterators")
