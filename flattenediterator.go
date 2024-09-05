@@ -45,6 +45,7 @@ func (receiver *FlattenedIterator) Close() error {
 		}
 	}
 
+	receiver.closed = true
 	var err error = errors.Join(err1, err2)
 	return err
 }
