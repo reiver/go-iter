@@ -57,7 +57,7 @@ import "github.com/reiver/go-iter"
 
 To install package **iter** do the following:
 ```
-GOPROXY=direct go get https://github.com/reiver/go-iter
+GOPROXY=direct go get github.com/reiver/go-iter
 ```
 
 ## Author
